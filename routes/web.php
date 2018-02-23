@@ -14,3 +14,11 @@
 $router->get('/', function () use ($router) {
     return view('home');
 });
+
+$router->group(['namespace' => 'Admin'], function () use ($router) {
+    $router->post('/auth/login', 'AuthController@login');
+
+
+/*    $router->group(['namespace' => 'User'], function() use ($router) {
+    });*/
+});
