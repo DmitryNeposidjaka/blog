@@ -39,7 +39,9 @@ class User extends Command
     }
     public function fire()
     {
-        if($login = $this->option('login') && $pass = $this->option('password')){
+        if($this->option('login') && $this->option('password')){
+            $login = $this->option('login');
+            $pass = $this->option('password');
             if (UserModel::getUserByLogin($login)) return $this->error('User already exists');
             $user = new UserModel;
             $user->login = $login;
