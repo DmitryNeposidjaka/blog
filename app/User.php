@@ -7,12 +7,12 @@ use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * Class User
  * @package App
  */
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -40,5 +40,24 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public static function getUserByLogin($login){
         return User::where('login', $login)->first();
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [
+            'token' => $this->api_key
+        ];
+    }
+
+    public function setNewApiToken()
+    {
+        $this->api_key = str_random(56);
+        $this->save();
+        return $this;
     }
 }

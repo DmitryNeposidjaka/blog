@@ -1,8 +1,7 @@
 <?php
-
 return [
 
-    /* Хуйпизда
+    /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------
@@ -14,7 +13,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('rrrrr', 'api'),
+        'guard' => env('AUTH_GUARD', 'api'),
     ],
 
     /*
@@ -87,5 +86,8 @@ return [
     'passwords' => [
         //
     ],
+
+    'ttl' => env('JWT_TTL', 3),
+    'refresh_ttl' => env('JWT_REFRESH_TTL', 100),
 
 ];

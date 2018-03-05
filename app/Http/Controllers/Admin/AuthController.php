@@ -9,36 +9,66 @@
 namespace App\Http\Controllers\Admin;
 
 
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\UserProvider;
+use App\Helpers\JWTAuthExtended;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AuthController
+
+class AuthController extends Controller
 {
     /**
-     * @var Guard
+     * @var JWTAuthExtended
      */
-    private $guard;
+    private $jwt;
 
-    /**
-     * @var UserProvider
-     */
-    private $provider;
 
-    public function __construct()
+    public function __construct(JWTAuthExtended $jwt)
     {
-        $this->guard = app('auth');
-
-        $this->provider = $this->guard->getProvider();
+        $this->jwt = $jwt;
     }
 
     public function login(Request $request){
-        if ($this->guard->validate($request->only('login', 'password'))) {
-            $user = $this->provider->retrieveByCredentials($request->all());
+        $this->validate($request, [
+            'login'    => 'required|string|max:255',
+            'password' => 'required',
+        ]);
+
+        try {
+
+            if (! $token = $this->jwt->login($request->only('login', 'password'))) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], 500);
+
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], 500);
+
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+            return response()->json(['token_absent' => $e->getMessage()], 500);
+
         }
-        print_r($request);
 
+        return $this->respondWithToken($token);
+    }
 
-        ;
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'accessToken' => $token,
+            'refreshToken' => 'bearer',
+            'expires_in' => $this->jwt->factory()->getTTL() * 60
+        ]);
     }
 }

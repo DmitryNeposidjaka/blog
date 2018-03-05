@@ -10,15 +10,16 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
 $router->get('/', function () use ($router) {
     return view('home');
 });
 
 $router->group(['namespace' => 'Admin'], function () use ($router) {
-    $router->post('/auth/login', 'AuthController@login');
+    $router->post('/admin/auth/login', 'AuthController@login');
 
-
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->get('/admin/example/test', 'ExampleController@test');
+    });
 /*    $router->group(['namespace' => 'User'], function() use ($router) {
     });*/
 });
