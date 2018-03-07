@@ -15,7 +15,10 @@ class Posts extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->text('text');
             $table->timestamps();
+            $table->boolean('disabled')->default(0);
         });
     }
 
