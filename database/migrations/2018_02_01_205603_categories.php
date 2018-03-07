@@ -15,6 +15,8 @@ class Categories extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', '56');
+            $table->boolean('disabled')->default(0);
             $table->timestamps();
         });
     }
