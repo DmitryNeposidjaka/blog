@@ -16,6 +16,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['namespace' => 'Admin'], function () use ($router) {
     $router->post('/admin/auth/login', 'AuthController@login');
+    $router->get('/admin/auth/refresh', ['middleware' => 'refresh']);
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/admin/example/test', 'ExampleController@test');

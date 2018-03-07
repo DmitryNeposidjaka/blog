@@ -27,7 +27,8 @@ class AuthController extends Controller
         $this->jwt = $jwt;
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $this->validate($request, [
             'login'    => 'required|string|max:255',
             'password' => 'required',
@@ -56,6 +57,9 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    public function refreshToken(Request $request)
+    {
+    }
     /**
      * Get the token array structure.
      *

@@ -44,7 +44,6 @@ class Authenticate
     }
 
     private function checkToken($local, $needle){
-
         return $local === $needle;
     }
 }
