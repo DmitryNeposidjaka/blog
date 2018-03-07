@@ -15,7 +15,9 @@ class Tags extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 56);
             $table->timestamps();
+            $table->boolean()->default(0);
         });
     }
 

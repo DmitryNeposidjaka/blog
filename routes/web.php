@@ -26,6 +26,11 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->get('/admin/categories/{id}', 'CategoriesController@read');
         $router->put('/admin/categories/{id}', 'CategoriesController@update');
         $router->delete('/admin/categories/{id}', 'CategoriesController@delete');
+        //  Tags
+        $router->post('/admin/tags', 'TagsController@create');
+        $router->get('/admin/tags/{id}', 'TagsController@read');
+        $router->put('/admin/tags/{id}', 'TagsController@update');
+        $router->delete('/admin/tags/{id}', 'TagsController@delete');
     });
 
 /*    $router->group(['namespace' => 'User'], function() use ($router) {

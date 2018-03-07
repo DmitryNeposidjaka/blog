@@ -12,16 +12,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Category
+ * Class Tag
  *
  * @package App
+ *
  * @property $name
  * @property $disabled
  */
-class Category extends Model
+class Tag extends Model
 {
-    protected $table = 'categories';
-
     protected $fillable = [
         'name',
     ];
