@@ -36,6 +36,10 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->get('/admin/posts/{id}', 'PostsController@read');
         $router->put('/admin/posts/{id}', 'PostsController@update');
         $router->delete('/admin/posts/{id}', 'PostsController@delete');
+        //  PostCategory
+        $router->post('/admin/post-category', 'PostCategoryController@assign');
+        $router->get('/admin/post-category/{post}/{category}', 'PostCategoryController@getLinked');
+        $router->delete('/admin/post-category/{post}/{category}', 'PostCategoryController@unlink');
     });
 
 /*    $router->group(['namespace' => 'User'], function() use ($router) {
