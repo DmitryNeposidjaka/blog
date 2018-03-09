@@ -40,8 +40,9 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->post('/admin/post-category', 'PostCategoryController@assign');
         $router->get('/admin/post-category/{post}/{category}', 'PostCategoryController@getLinked');
         $router->delete('/admin/post-category/{post}/{category}', 'PostCategoryController@unlink');
+        //  PostTag
+        $router->post('/admin/post-tag', 'PostTagController@assign');
+        $router->get('/admin/post-tag/{post}/{tag}', 'PostTagController@getLinked');
+        $router->delete('/admin/post-tag/{post}/{tag}', 'PostTagController@unlink');
     });
-
-/*    $router->group(['namespace' => 'User'], function() use ($router) {
-    });*/
 });
