@@ -7,6 +7,9 @@
  */
 ?>
 <html>
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache">
+</head>
 <body>
 <div id="app"></div>
 <script src="/dist/admin/app.js"></script>
