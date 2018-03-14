@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
+import Home from '../layouts/MainLayout';
+import Authorize from '../layouts/AuthorizeLayout';
 Vue.use(Router);
 
 const router = new Router({
   routes: [
-/*    {
+    {
       path: '/',
       name: 'home',
       component: Home,
@@ -16,7 +17,7 @@ const router = new Router({
       path: '/auth',
       name: 'Auth',
       component: Authorize,
-    },*/
+    },
   ],
 });
 
