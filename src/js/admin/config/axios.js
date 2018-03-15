@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://temily.megakit.pro/admin',
+  baseURL: 'http://blog.test/api/admin',
 });
 /* instance.interceptors.response.use(function (response) {
   // Do something with response data

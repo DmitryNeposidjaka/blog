@@ -1,16 +1,70 @@
 <template>
-    <el-form label-position="right" label-width="40px" class="auth-form">
-        <el-form-item label="Login">
-            <el-input type="text"></el-input>
+    <el-form label-position="right" :model="authForm" ref="authFormRef" :rules="rules" label-width="50px" class="auth-form">
+        <el-form-item label="Login" prop="login">
+            <el-input type="text" v-model="authForm.login"></el-input>
         </el-form-item>
-        <el-form-item label="Pass">
-            <el-input type="password"></el-input>
+        <el-form-item label="Pass" prop="password">
+            <el-input type="password" v-model="authForm.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="login('authFormRef')">login</el-button>
         </el-form-item>
     </el-form>
 </template>
 
 <script>
-
+export default {
+  data(){
+    return{
+      authForm: {
+        login: "",
+        password: "",
+      },
+      rules: {
+        login: [
+          { required: true, message: "Login is required", trigger: 'blur'},
+          { min: 4, max: 10, message: "Length is not available", trigger: 'blur'},
+        ],
+        password: [
+          { required: true, message: "Password is required", trigger: 'blur'},
+          { min: 4, max: 10, message: "Length is not available", trigger: 'blur'},
+        ],
+      }
+    }
+  },
+  methods: {
+    login($ref){
+      const vm = this;
+        const form = this.$refs[$ref];
+        form.validate((valid) => {
+          if(valid){
+            const model = this.$refs[$ref].model;
+            vm._sendRequest(
+              vm._createFormData(model)
+            );
+          }
+        });
+    },
+    _createFormData(model){
+      const formData = new FormData();
+      for (var index in model) {
+        formData.set(index, model[index]);
+      }
+      return formData;
+    },
+    _sendRequest(formData){
+      this.axios.request({
+        method: 'post',
+        url: 'auth/login',
+        data: formData,
+      }).then(function (response) {
+        console.log(response.data)
+      }).catch(function (error) {
+          console.log(error);
+      });
+    }
+  }
+}
 </script>
 
 <style>
