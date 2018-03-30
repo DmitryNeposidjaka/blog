@@ -53,16 +53,14 @@ export default {
       return formData;
     },
     _sendRequest(formData){
-      this.axios.request({
+      this.$auth.login({
         method: 'post',
-        url: 'auth/login',
-        data: formData,
-      }).then(function (response) {
-        console.log(response.data)
-      }).catch(function (error) {
-          console.log(error);
+        data: formData
       });
     }
+  },
+  mounted(){
+    console.log(this.$auth);
   }
 }
 </script>
