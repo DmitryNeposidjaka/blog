@@ -54,7 +54,11 @@ class Refresh
         }
 
         $user->setNewApiToken();
-        return $this->jwt->fromUser($user);
+        return response()->json([
+            'accessToken' => $this->jwt->fromUser($user),
+            'refreshToken' => 'bearer',
+            'tokenExpired' => $this->jwt->factory()->getTTL() * 60
+        ]);
     }
 
 }

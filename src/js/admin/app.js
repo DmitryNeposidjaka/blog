@@ -19,12 +19,18 @@ Vue.use(VueI18n);
 Vue.use(ElementUI, { locale });
 Vue.use(moment);
 
-// vue-auth
 Vue.use(require('@websanova/vue-auth'), {
   auth: require('./auth/token.js'),
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
-  router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js')
-})
+  router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+  tokenStore: ['cookie'],
+  tokenDefaultName: 'myToken',
+  tokenExpired: ()=> {
+    console.log('tokenExpired')
+  },
+  refreshData: {url: 'auth/refresh', method: 'GET', enabled: true, interval: 30, rememberMe: true}
+});
+
 
 Vue.config.devtools = true  //  Включает Vue devtools
 new Vue({
@@ -33,5 +39,7 @@ new Vue({
   store,
   template: '<App/>',
   components: {App},
-
+  created(){
+    this.$auth.ready()
+  }
 });

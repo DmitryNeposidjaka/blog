@@ -2,8 +2,12 @@
     <el-container class="main-conteiner">
         <m-sidebar></m-sidebar>
         <el-container>
-            <m-header></m-header>
-            <m-content></m-content>
+            <el-header style="text-align: right; font-size: 12px">
+                <m-header></m-header>
+            </el-header>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
         </el-container>
     </el-container>
 </template>
@@ -11,10 +15,9 @@
 <script>
 import MSidebar from '../components/Sidebar';
 import MHeader from '../components/Header';
-import MContent from '../components/Content';
 
 export default {
-  components: {MSidebar, MHeader, MContent}
+  components: {MSidebar, MHeader}
 }
 </script>
 

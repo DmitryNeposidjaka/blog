@@ -5,8 +5,7 @@ module.exports = {
   },
 
   response: function (res) {
-      token = res.accessToken;
-
+      token = res.data.accessToken;
     if (token) {
       return token;
     }

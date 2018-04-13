@@ -1,5 +1,5 @@
 <template>
-    <el-header style="text-align: right; font-size: 12px">
+    <div>
         <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
@@ -8,19 +8,14 @@
                 <el-dropdown-item>Delete</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
-        <span>Дима</span>
-    </el-header>
+        <span>Tom</span>
+    </div>
 </template>
 
 <script>
 
 </script>
 
-<style scope>
-    .el-header {
-        background-color: #B3C0D1;
-        color: #333;
-        line-height: 60px;
-        width: 100%;
-    }
+<style>
+
 </style>

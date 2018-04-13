@@ -7,5 +7,5 @@
  */
 
 return [
-    'ttl' => env('JWT_TTL', 10),
+    'ttl' => env('JWT_TTL', 30),
 ];

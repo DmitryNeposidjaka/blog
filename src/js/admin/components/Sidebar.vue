@@ -3,7 +3,7 @@
         <el-menu :default-openeds="['1', '3']">
             <el-submenu index="1">
                 <template slot="title"><i class="el-icon-message"></i>Контент</template>
-                <el-menu-item index="1-1">Статьи </el-menu-item>
+                <router-link to="/posts">Posts</router-link>
                 <el-menu-item index="1-2">Категории </el-menu-item>
                 <el-menu-item index="1-3">Метки </el-menu-item>
             </el-submenu>

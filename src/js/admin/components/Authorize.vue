@@ -55,7 +55,8 @@ export default {
     _sendRequest(formData){
       this.$auth.login({
         method: 'post',
-        data: formData
+        data: formData,
+        rememberMe: true
       });
     }
   },

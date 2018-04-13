@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../layouts/MainLayout';
 import Authorize from '../layouts/AuthorizeLayout';
+import Posts from '../components/Posts';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -10,11 +12,17 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
-      children: [],
-      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '/posts',
+          name: 'posts',
+          component: Posts,
+        }
+      ],
+    //  meta: {auth: true},
     },
     {
-      path: '/auth',
+      path: '/login',
       name: 'Auth',
       component: Authorize,
     },

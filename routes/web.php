@@ -22,6 +22,8 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
     $router->get('/api/admin/auth/refresh', ['middleware' => 'refresh']);
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
+        //  Users
+        $router->get('/api/admin/auth/user', 'UserController@read');
         //  Categories
         $router->post('/api/admin/categories', 'CategoriesController@create');
         $router->get('/api/admin/categories/{id}', 'CategoriesController@read');

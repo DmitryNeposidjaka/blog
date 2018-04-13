@@ -72,7 +72,7 @@ class AuthController extends Controller
         return response()->json([
             'accessToken' => $token,
             'refreshToken' => 'bearer',
-            'expires_in' => $this->jwt->factory()->getTTL() * 60
+            'tokenExpired' => $this->jwt->factory()->getTTL() * 60
         ]);
     }
 }
