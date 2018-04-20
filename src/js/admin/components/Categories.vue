@@ -1,10 +1,10 @@
 <template>
-        <el-row>
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span>Статьи</span>
-                    <el-button style="float: right; padding: 5px 5px" type="success">Добавить новую</el-button>
-                </div>
+    <el-row>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>Категории</span>
+                <el-button style="float: right; padding: 5px 5px" type="success">Добавить новую</el-button>
+            </div>
             <el-table
                     :data="tableData"
                     style="width: 100%">
@@ -23,9 +23,8 @@
                         label="Address">
                 </el-table-column>
             </el-table>
-            </el-card>
-        </el-row>
-<!--    <el-button v-on:click="send">SEND</el-button>-->
+        </el-card>
+    </el-row>
 </template>
 
 <script>
@@ -50,17 +49,6 @@ export default {
         address: 'No. 189, Grove St, Los Angeles'
       }]
     }
-  },
-  methods: {
-    send(){
-      this.axios({
-        method:'GET',
-        url: '/posts/2',
-      })
-    }
-  },
-  created(){
-    console.log(this)
   }
 }
 </script>

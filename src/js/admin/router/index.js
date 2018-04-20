@@ -3,6 +3,9 @@ import Router from 'vue-router';
 import Home from '../layouts/MainLayout';
 import Authorize from '../layouts/AuthorizeLayout';
 import Posts from '../components/Posts';
+import Structurize from '../components/Structurize';
+
+
 
 Vue.use(Router);
 
@@ -17,7 +20,12 @@ const router = new Router({
           path: '/posts',
           name: 'posts',
           component: Posts,
-        }
+        },
+        {
+          path: '/structurize',
+          name: 'structurize',
+          component: Structurize,
+        },
       ],
     //  meta: {auth: true},
     },

@@ -28,4 +28,7 @@ export default {
 .main-conteiner{
     width: 100%;
 }
+    .el-header{
+        padding: 0px;
+    }
 </style>
