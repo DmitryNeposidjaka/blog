@@ -3,7 +3,7 @@
             <el-dialog
                     title="Новая статья"
                     :visible.sync="dialogVisible"
-                    width="50%"
+                    width="70%"
                     :before-close="handleClose">
                 <div>
                     <span></span>
@@ -13,7 +13,7 @@
                 </div>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="handleClose">Отменить</el-button>
-                    <el-button type="primary" @click="dialogVisible = false">Создать</el-button>
+                    <el-button type="primary" @click="savePost">Создать</el-button>
                 </span>
             </el-dialog>
 
@@ -23,53 +23,52 @@
                     <el-button style="float: right; padding: 5px 5px" type="success" @click="dialogVisible = true">Добавить новую</el-button>
                 </div>
             <el-table
-                    :data="tableData"
+                    :data="getPosts"
                     style="width: 100%">
                 <el-table-column
-                        prop="date"
-                        label="Date"
+                        prop="created_at"
+                        label="Дата"
                         width="180">
+                    <template slot-scope="scope">
+                        <span style="color: #909399">{{scope.row.created_at}}</span>
+                    </template>
                 </el-table-column>
                 <el-table-column
-                        prop="name"
-                        label="Name"
-                        width="180">
+                        prop="title"
+                        label="Название"
+                        width="400">
+                    <template slot-scope="scope">
+                        <span style="color: #3a8ee6">{{scope.row.title}}</span>
+                    </template>
                 </el-table-column>
                 <el-table-column
-                        prop="address"
-                        label="Address">
+                        prop="disabled"
+                        label="Аут">
+                    <template slot-scope="scope">
+                        <el-tag
+                           :type="scope.row.disabled ? 'info' : 'success'"
+                           close-transition>{{scope.row.disabled? 'удален': 'активный'}}</el-tag>
+                    </template>
                 </el-table-column>
             </el-table>
             </el-card>
         </el-row>
-<!--    <el-button v-on:click="send">SEND</el-button>-->
 </template>
 
 <script>
   import PostForm from './PostFrom';
+import {mapGetters} from 'vuex';
 
 export default {
   data(){
     return {
       dialogVisible: false,
-      tableData: [{
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }]
     }
+  },
+  computed:{
+    ...mapGetters('posts', [
+      'getPosts'
+    ]),
   },
   methods: {
     send(){
@@ -78,6 +77,9 @@ export default {
         url: '/posts/2',
       })
     },
+    closeModal() {
+      this.dialogVisible = false;
+    },
     handleClose(done) {
       this.$confirm('Данные будут потеряны')
         .then(_ => {
@@ -85,10 +87,13 @@ export default {
           done();
         })
         .catch(_ => {});
+    },
+    savePost(){
+      this.$events.emit('savePost');
     }
   },
   created(){
-    console.log(this)
+    this.$events.on('postSaved', () => {this.closeModal()})
   },
   components: {PostForm}
 }

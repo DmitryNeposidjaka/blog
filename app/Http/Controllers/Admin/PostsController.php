@@ -24,7 +24,9 @@ class PostsController extends Controller
 
         return response()->json((new Post(['title' => $request->input('title'),'text' => $request->input('text')]))->save());
     }
-
+    public function getAll(){
+        return response()->json(Post::all());
+    }
     public function read($id)
     {
         return response()->json(Post::findOrFail($id));

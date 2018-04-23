@@ -6,6 +6,15 @@
                 <m-header></m-header>
             </el-header>
             <el-main>
+                <el-row>
+                    <div class="main-location">
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <el-breadcrumb-item :to="{ path: '/' }">Главная</el-breadcrumb-item>
+                            <el-breadcrumb-item>Страница</el-breadcrumb-item>
+                        </el-breadcrumb>
+                        <watcher-alert></watcher-alert>
+                    </div>
+                </el-row>
                 <router-view></router-view>
             </el-main>
         </el-container>
@@ -15,9 +24,41 @@
 <script>
 import MSidebar from '../components/Sidebar';
 import MHeader from '../components/Header';
+import watcherAlert from '../modules/watcherAlert';
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+
+
 
 export default {
-  components: {MSidebar, MHeader}
+  data(){
+    return{};
+  },
+  computed:{
+    ...mapGetters('posts',[
+      'getPosts',
+      'getPost',
+    ]),
+  },
+  methods:{
+    ...mapActions('posts',[
+      'setPosts',
+      'addPost',
+    ]),
+    loadPosts(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/posts'
+      }).then(function (response) {
+        vm.setPosts(response.data)
+      });
+    }
+  },
+  created(){
+    this.loadPosts();
+  },
+  components: {MSidebar, MHeader,watcherAlert}
 }
 </script>
 
@@ -30,5 +71,11 @@ export default {
 }
     .el-header{
         padding: 0px;
+    }
+    .main-location{
+        margin-bottom: 30px;
+    }
+    .el-breadcrumb{
+        margin-bottom: 10px;
     }
 </style>

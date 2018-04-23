@@ -31,14 +31,13 @@ Vue.use(require('@websanova/vue-auth'), {
   refreshData: {url: 'auth/refresh', method: 'GET', enabled: true, interval: 30, rememberMe: true}
 });
 
-
 Vue.config.devtools = true  //  Включает Vue devtools
 new Vue({
   el: '#app',
   router,
   store,
   template: '<App/>',
-  components: {App},
+  components: {App,},
   created(){
     this.$auth.ready()
   }

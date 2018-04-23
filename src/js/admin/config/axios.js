@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Vue from 'vue';
+import httpWatcher from '../modules/httpWatcher'
 
 const instance = axios.create({
   baseURL: 'http://blog.test/api/admin',
@@ -9,8 +10,9 @@ const instance = axios.create({
   }, function (error) {
   if(error.response.status === 401){
     Vue.auth.refresh();
-    document.cookie = "remeberMe=true"; //TODO поменять эту херь если есть возможность через vue-auth
+    document.cookie = "rememberMe=true"; //TODO поменять эту херь если есть возможность через vue-auth
   }
+   httpWatcher.$events.emit('findHttpError', error.response)
    return error.response
 });
 export default instance;

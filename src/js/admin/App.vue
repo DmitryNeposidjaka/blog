@@ -7,9 +7,8 @@
 <script>
 export default {
   name: 'app',
-  created(){
-    //this.$auth.ready()
-  }
+  mounted(){},
+  created(){}
 };
 </script>
 
