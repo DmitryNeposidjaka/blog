@@ -5,6 +5,7 @@ import httpWatcher from '../modules/httpWatcher'
 const instance = axios.create({
   baseURL: 'http://blog.test/api/admin',
 });
+instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
  instance.interceptors.response.use(function (response) {
   return response;
   }, function (error) {

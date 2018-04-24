@@ -27,18 +27,18 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         //  Categories
         $router->post('/api/admin/categories', 'CategoriesController@create');
         $router->get('/api/admin/categories/{id}', 'CategoriesController@read');
-        $router->put('/api/admin/categories/{id}', 'CategoriesController@update');
+        $router->post('/api/admin/categories/{id}', 'CategoriesController@update');
         $router->delete('/api/admin/categories/{id}', 'CategoriesController@delete');
         //  Tags
         $router->post('/api/admin/tags', 'TagsController@create');
         $router->get('/api/admin/tags/{id}', 'TagsController@read');
-        $router->put('/api/admin/tags/{id}', 'TagsController@update');
+        $router->post('/api/admin/tags/{id}', 'TagsController@update');
         $router->delete('/api/admin/tags/{id}', 'TagsController@delete');
         //  Posts
         $router->post('/api/admin/posts', 'PostsController@create');
         $router->get('/api/admin/posts/{id}', 'PostsController@read');
         $router->get('/api/admin/posts/', 'PostsController@getAll');
-        $router->put('/api/admin/posts/{id}', 'PostsController@update');
+        $router->post('/api/admin/posts/{id}', 'PostsController@update');
         $router->delete('/api/admin/posts/{id}', 'PostsController@delete');
         //  PostCategory
         $router->post('/api/admin/post-category', 'PostCategoryController@assign');
