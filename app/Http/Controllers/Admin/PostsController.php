@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -21,8 +21,15 @@ class PostsController extends Controller
             'title' => 'required',
             'text' => 'required',
         ]);
+        dd($request->file('thumbnail'));
+        $model = new Post();
+        if($request->hasFile('thumbnail')) $model->description = $request->input('thumbnail');
+        $model->title = $request->input('title');
+        if($request->has('description')) $model->description = $request->input('description');
+        $model->text = $request->input('text');
+        $model->save();
 
-        return response()->json((new Post(['title' => $request->input('title'),'text' => $request->input('text')]))->save());
+        return response()->json($model);
     }
     public function getAll(){
         return response()->json(Post::all());

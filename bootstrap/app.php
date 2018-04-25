@@ -101,6 +101,8 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+
+config(['app.thumbnails' => dirname(__DIR__).'/public/uploads/posts/thumbnails']);
 $app->configure('auth');
 
 return $app;
