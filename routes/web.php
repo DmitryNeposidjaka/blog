@@ -48,5 +48,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->post('/api/admin/post-tag', 'PostTagController@assign');
         $router->get('/api/admin/post-tag/{post}/{tag}', 'PostTagController@getLinked');
         $router->delete('/api/admin/post-tag/{post}/{tag}', 'PostTagController@unlink');
+        //  Store
+        $router->post('/api/admin/store/post-thumbnail', 'StoreController@postThumbnail');
     });
 });

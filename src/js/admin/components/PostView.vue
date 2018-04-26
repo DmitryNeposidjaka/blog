@@ -2,6 +2,8 @@
     <el-row>
         <p><span></span></p>
         <h2>{{model.title}}</h2>
+        <img :src="model.thumbnail" class="image">
+        <strong>{{model.description}}</strong>
         <vue-markdown :source="model.text"></vue-markdown>
     </el-row>
 </template>
@@ -18,5 +20,7 @@ export default {
 </script>
 
 <style>
-
+    .image{
+        width: 100%;
+    }
 </style>

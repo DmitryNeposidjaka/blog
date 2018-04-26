@@ -15,20 +15,22 @@
                 <el-row>
                     <el-col :span="24">
                         <el-upload
+                                :headers="{Authorization: 'Bearer '+$auth.token() }"
+                                name="thumbnail"
                                 class="avatar-uploader"
-                                action="https://jsonplaceholder.typicode.com/posts/"
+                                action="http://blog.test/api/admin/store/post-thumbnail"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload"
                         >
-                            <img v-if="postForm.thumbnail" :src="postForm.thumbnail" class="avatar">
+                            <img v-if="temporary.thumbnail" :src="temporary.thumbnail" class="avatar">
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-col>
                 </el-row>
                 <el-row :gutter="20">
                     <el-col :span="12">
-                        <el-form-item label="Описание" >
+                        <el-form-item label="Описание" prop="description">
                             <el-input type="textarea" v-model="postForm.description" :rows="3"></el-input>
                         </el-form-item>
                     </el-col>
@@ -61,6 +63,9 @@ export default {
   data(){
     return{
       formName: 'postForm',
+      temporary: {
+        thumbnail: '',
+      },
       postForm: {
         thumbnail: '',
         description: '',
@@ -71,6 +76,9 @@ export default {
         title: [
           {required: true, message: 'Название должно быть заполнени'},
           {min: 5, max: 255, message: 'Длина заголовка должна быть между 5-ю и 255-ти'}
+        ],
+        description: [
+          {max: 255, message: 'Максимальная дляна 255'},
         ],
         text: [
           {required: true, message: 'В статье должен быть контент'},
@@ -101,11 +109,15 @@ export default {
   methods: {
     save(){
       const data = this.$refs[this.formName];
-
-      if (data.validate() == true){
-        const formData = this.getFormData(data.model);
-        this.sendPost(formData);
-      }
+      data.validate((valid) => {
+        if (valid) {
+          const formData = this.getFormData(data.model);
+          this.sendPost(formData);
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     },
     sendPost(formData){
       const vm = this;
@@ -131,7 +143,8 @@ export default {
       return formData;
     },
     handleAvatarSuccess(res, file) {
-      this.postForm.thumbnail = URL.createObjectURL(file.raw);
+      this.temporary.thumbnail = URL.createObjectURL(file.raw);
+      this.postForm.thumbnail = file.raw.name;
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
@@ -199,8 +212,8 @@ export default {
         text-align: center;
     }
     .avatar {
-        width: 178px;
-        height: 178px;
+        width: 100%;
+        height: 100%;
         display: block;
     }
 </style>

@@ -21,9 +21,9 @@ class PostsController extends Controller
             'title' => 'required',
             'text' => 'required',
         ]);
-        dd($request->file('thumbnail'));
+
         $model = new Post();
-        if($request->hasFile('thumbnail')) $model->description = $request->input('thumbnail');
+        if($request->has('thumbnail')) $model->thumbnail = basename($request->input('thumbnail'));
         $model->title = $request->input('title');
         if($request->has('description')) $model->description = $request->input('description');
         $model->text = $request->input('text');
@@ -32,7 +32,11 @@ class PostsController extends Controller
         return response()->json($model);
     }
     public function getAll(){
-        return response()->json(Post::all());
+        $posts = Post::all();
+        foreach ($posts as &$post){ // TODO вывести в метод
+            $post->thumbnail = (!empty($post->thumbnail))? url(config('store.public.thumbnails').$post->thumbnail) : url(config('store.public.uploads').'default.jpg');
+        }
+        return response()->json($posts);
     }
     public function read($id)
     {
@@ -45,11 +49,15 @@ class PostsController extends Controller
             'title' => 'required',
             'text' => 'required',
         ]);
-        $category = Post::findOrFail($id);
-        $category->title = $request->input('title');
-        $category->text = $request->input('text');
+        $model = Post::findOrFail($id);
+        if($request->has('thumbnail')) $model->thumbnail = basename($request->input('thumbnail'));
+        $model->title = $request->input('title');
+        if($request->has('description')) $model->description = $request->input('description');
+        $model->text = $request->input('text');
+        $model->save();
 
-        return response()->json($category->save());
+
+        return response()->json($model);
     }
 
     public function delete($id)

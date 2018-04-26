@@ -102,7 +102,10 @@ $app->router->group([
 });
 
 
-config(['app.thumbnails' => dirname(__DIR__).'/public/uploads/posts/thumbnails']);
+config(['store.thumbnails' => dirname(__DIR__).'/public/uploads/posts/thumbnails']);
+config(['store.public.thumbnails' => '/uploads/posts/thumbnails/']);
+config(['store.uploads' => dirname(__DIR__).'/public/uploads/']);
+config(['store.public.uploads' => '/uploads/']);
 $app->configure('auth');
 
 return $app;

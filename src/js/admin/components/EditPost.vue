@@ -10,6 +10,35 @@
                 <span :class="{danger: isMaxTitle, warning: isWarningTitle}">{{titleLength}}</span>
             </el-col>
         </el-row>
+        <el-row>
+            <el-col :span="24">
+                <el-upload
+                        :headers="{Authorization: 'Bearer '+$auth.token() }"
+                        name="thumbnail"
+                        class="avatar-uploader"
+                        action="http://blog.test/api/admin/store/post-thumbnail"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload"
+                >
+                    <img v-if="temporary.thumbnail" :src="temporary.thumbnail" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20">
+            <el-col :span="12">
+                <el-form-item label="Описание" prop="description">
+                    <el-input type="textarea" v-model="postForm.description" :rows="3"></el-input>
+                </el-form-item>
+            </el-col>
+            <el-col :span="11">
+                <vue-markdown :source="postForm.description" class="my-markdown-description"></vue-markdown>
+            </el-col>
+            <el-col :span="1">
+                <span :class="{danger: isMaxDescription, warning: isWarningDescription}">{{descriptionLength}}</span>
+            </el-col>
+        </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
                 <el-form-item label="Контент" prop="text">
@@ -30,7 +59,12 @@
     data(){
       return{
         formName: 'postForm',
+        temporary: {
+          thumbnail: '',
+        },
         postForm: {
+          thumbnail: '',
+          description: '',
           title: '',
           text: '',
         },
@@ -38,6 +72,9 @@
           title: [
             {required: true, message: 'Название должно быть заполнени'},
             {min: 5, max: 255, message: 'Длина заголовка должна быть между 5-ю и 255-ти'}
+          ],
+          description: [
+            {max: 255, message: 'Максимальная дляна 255'},
           ],
           text: [
             {required: true, message: 'В статье должен быть контент'},
@@ -85,10 +122,27 @@
           formData.append(key, data[key]);
         }
         return formData;
+      },
+      handleAvatarSuccess(res, file) {
+        this.temporary.thumbnail = URL.createObjectURL(file.raw);
+        this.postForm.thumbnail = file.raw.name;
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('Avatar picture must be JPG format!');
+        }
+        if (!isLt2M) {
+          this.$message.error('Avatar picture size can not exceed 2MB!');
+        }
+        return isJPG && isLt2M;
       }
     },
     created(){
       this.postForm = this.model;   //TODO переписать под модель в форму
+      this.temporary.thumbnail = this.model.thumbnail;
       this.$events.on('editPost', () => {this.save()})
     },
     components: {VueMarkdown}
@@ -97,4 +151,51 @@
 
 <style>
 
+    .danger{
+        color: red;
+    }
+    .warning{
+        color: orange;
+    }
+    .my-markdown{
+        border: 1px solid #66b1ff;
+        padding: 5px 15px;
+        border-radius: 4px;
+        min-height: 200px;
+    }
+    .my-markdown-description{
+        border: 1px solid #66b1ff;
+        padding: 5px 15px;
+        border-radius: 4px;
+        min-height: 50px;
+    }
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+
+        width: 100%;
+        height: 300px;
+    }
+    .avatar-uploader {
+        margin: 5px 5px 30px 120px;
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 278px;
+        text-align: center;
+    }
+    .avatar {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 </style>
