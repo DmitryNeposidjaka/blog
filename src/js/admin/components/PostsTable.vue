@@ -65,7 +65,7 @@
     import PostOperations from './PostOperations';
 
   export default {
-    props: ['models'],
+    props: ['models', 'categories'],
     data(){
       const vm = this;
       return{

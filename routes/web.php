@@ -27,6 +27,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         //  Categories
         $router->post('/api/admin/categories', 'CategoriesController@create');
         $router->get('/api/admin/categories/{id}', 'CategoriesController@read');
+        $router->get('/api/admin/categories/', 'CategoriesController@getAll');
         $router->post('/api/admin/categories/{id}', 'CategoriesController@update');
         $router->delete('/api/admin/categories/{id}', 'CategoriesController@delete');
         //  Tags
@@ -37,6 +38,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         //  Posts
         $router->post('/api/admin/posts', 'PostsController@create');
         $router->get('/api/admin/posts/{id}', 'PostsController@read');
+        $router->get('/api/admin/posts/get-back/{id}', 'PostsController@getBack');
         $router->get('/api/admin/posts/', 'PostsController@getAll');
         $router->post('/api/admin/posts/{id}', 'PostsController@update');
         $router->delete('/api/admin/posts/{id}', 'PostsController@delete');

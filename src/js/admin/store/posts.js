@@ -17,7 +17,14 @@ const store = {
     },
     addPost(state, data){
       state.posts.push(data);
-    }
+    },
+    updatePost(state, data){
+      state.posts.map(function(item, i, arr){
+        if(item.id == data.id){
+          state.posts.splice(i, 1, data);
+        }
+      });
+    },
   },
   actions: {
     setPosts(context, data){
@@ -25,7 +32,11 @@ const store = {
     },
     addPost(context, data){
       context.commit('addPost', data);
-    }
+    },
+    updatePost(context, data){
+      console.log(data)
+      context.commit('updatePost', data);
+    },
   },
   modules: {},
   strict: true,

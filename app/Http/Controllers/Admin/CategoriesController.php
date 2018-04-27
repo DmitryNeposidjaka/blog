@@ -40,6 +40,10 @@ class CategoriesController extends Controller
         return response()->json($category->save());
     }
 
+    public function getAll(){
+        $categories = Category::all();
+        return response()->json($categories);
+    }
     public function delete($id)
     {
         $category = Category::findOrFail($id);

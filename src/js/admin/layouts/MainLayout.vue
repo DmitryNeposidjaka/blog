@@ -39,11 +39,19 @@ export default {
       'getPosts',
       'getPost',
     ]),
+    ...mapGetters('categories',[
+      'getCategories',
+      'getCategory',
+    ]),
   },
   methods:{
     ...mapActions('posts',[
       'setPosts',
       'addPost',
+    ]),
+    ...mapActions('categories',[
+      'setCategories',
+      'addCategory',
     ]),
     loadPosts(){
       const vm = this;
@@ -53,10 +61,21 @@ export default {
       }).then(function (response) {
         vm.setPosts(response.data)
       });
-    }
+    },
+    loadCategories(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/categories'
+      }).then(function (response) {
+        vm.setCategories(response.data)
+      });
+    },
   },
   created(){
     this.loadPosts();
+    this.loadCategories();
+    // this.loadPosts();
   },
   components: {MSidebar, MHeader,watcherAlert}
 }

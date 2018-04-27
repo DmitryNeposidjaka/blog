@@ -7,7 +7,8 @@
                     :before-close="handleClose">
                 <div>
                     <span></span>
-                    <post-form>
+                    <post-form
+                            :categories="getCategories">
                     </post-form>
                 </div>
                 <span slot="footer" class="dialog-footer">
@@ -23,15 +24,17 @@
                 </div>
                 <posts-table
                         :models="getPosts"
+                        :categories="getCategories"
                 ></posts-table>
             </el-card>
         </el-row>
 </template>
 
 <script>
-    import PostsTable from './PostsTable';
+import PostsTable from './PostsTable';
 import PostForm from './PostFrom';
 import {mapGetters} from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
   data(){
@@ -43,8 +46,15 @@ export default {
     ...mapGetters('posts', [
       'getPosts'
     ]),
+    ...mapGetters('categories', [
+      'getCategories'
+    ]),
   },
   methods: {
+    ...mapActions('posts', [
+      'updatePost',
+      'addPost'
+    ]),
     send(){
       this.axios({
         method:'GET',
@@ -67,6 +77,8 @@ export default {
     }
   },
   created(){
+    this.$events.on('postUpdated', (model) => {this.updatePost(model)})
+    this.$events.on('addPost', (model) => {this.addPost(model)})
     this.$events.on('postSaved', () => {this.closeModal()})
   },
   components: {PostForm, PostsTable}

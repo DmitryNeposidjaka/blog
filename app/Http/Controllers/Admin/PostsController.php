@@ -64,7 +64,15 @@ class PostsController extends Controller
     {
         $category = Post::findOrFail($id);
         $category->disabled = true;
+        $category->save();
+        return response()->json($category);
+    }
 
-        return response()->json($category->save());
+    public function getBack($id)
+    {
+        $category = Post::findOrFail($id);
+        $category->disabled = false;
+        $category->save();
+        return response()->json($category);
     }
 }
