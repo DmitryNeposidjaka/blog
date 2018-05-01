@@ -8,7 +8,7 @@
 
 namespace App;
 
-
+use App\PostCategory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -25,4 +25,9 @@ class Post extends Model
         'title',
         'text',
     ];
+
+    public function categories(){
+        return $this->hasMany(PostCategory::class, 'post_id', 'id');
+    }
+
 }

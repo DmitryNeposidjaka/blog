@@ -54,7 +54,7 @@
             <el-table-column
                     label="Операции">
                 <template slot-scope="scope">
-                    <post-operations :model="scope.row"></post-operations>
+                    <post-operations :model="scope.row" :categories="categories"></post-operations>
                 </template>
             </el-table-column>
         </el-table>

@@ -42,10 +42,6 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->get('/api/admin/posts/', 'PostsController@getAll');
         $router->post('/api/admin/posts/{id}', 'PostsController@update');
         $router->delete('/api/admin/posts/{id}', 'PostsController@delete');
-        //  PostCategory
-        $router->post('/api/admin/post-category', 'PostCategoryController@assign');
-        $router->get('/api/admin/post-category/{post}/{category}', 'PostCategoryController@getLinked');
-        $router->delete('/api/admin/post-category/{post}/{category}', 'PostCategoryController@unlink');
         //  PostTag
         $router->post('/api/admin/post-tag', 'PostTagController@assign');
         $router->get('/api/admin/post-tag/{post}/{tag}', 'PostTagController@getLinked');

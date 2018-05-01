@@ -54,7 +54,7 @@
             </el-col>
         </el-row>
         <el-row>
-            <el-select v-model="postCategories" multiple placeholder="Select">
+            <el-select v-model="postForm.categories" multiple placeholder="Select">
                 <el-option
                         v-for="item in categories"
                         :key="item.id"
@@ -73,7 +73,6 @@ export default {
   props: ['categories'],
   data(){
     return{
-      postCategories: [],
       formName: 'postForm',
       temporary: {
         thumbnail: '',
@@ -83,6 +82,7 @@ export default {
         description: '',
         title: '',
         text: '',
+        categories: []
       },
       rules:{
         title: [
@@ -137,26 +137,6 @@ export default {
       vm.axios({
         method: 'post',
         url: '/posts',
-        data: formData,
-      }).then(function (response) {
-        if(response.status == 200){
-          vm.$events.emit('addPost', response.data);
-          vm.formSaved();
-        }
-      });
-    },
-    savePostCategories(post){
-      if(this.postCategories.length <= 0) return false;
-      const vm = this;
-      this.postCategories.map(function (item, i, arr) {
-        vm.sendPostCatrgory(vm.getFormData({post: post.id, category: item}));
-      })
-    },
-    sendPostCatrgory(formData){ //TODO переделать назначение гатегорий
-      const vm = this;
-      vm.axios({
-        method: 'post',
-        url: '/post-category',
         data: formData,
       }).then(function (response) {
         if(response.status == 200){

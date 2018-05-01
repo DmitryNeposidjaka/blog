@@ -49,24 +49,36 @@
                 <vue-markdown :source="postForm.text" class="my-markdown"></vue-markdown>
             </el-col>
         </el-row>
+        <el-row>
+            <el-select v-model="postForm.categories" multiple placeholder="Select">
+                <el-option
+                        v-for="(item) in categories"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id">
+                </el-option>
+            </el-select>
+        </el-row>
     </el-form>
 </template>
 
 <script>
   import VueMarkdown from 'vue-markdown'
   export default {
-    props: ['model'],
+    props: ['model', 'categories'],
     data(){
       return{
         formName: 'postForm',
         temporary: {
           thumbnail: '',
         },
+
         postForm: {
           thumbnail: '',
           description: '',
           title: '',
           text: '',
+          categories: [],
         },
         rules:{
           title: [
@@ -91,6 +103,15 @@
       },
       isWarningTitle(){
         return this.postForm.title.length >= 200;
+      },
+      descriptionLength(){
+        return this.postForm.description.length;
+      },
+      isMaxDescription(){
+        return this.postForm.description.length >= 255;
+      },
+      isWarningDescription(){
+        return this.postForm.description.length >= 200;
       },
     },
     methods: {
