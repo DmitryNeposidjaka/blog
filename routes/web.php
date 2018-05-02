@@ -27,6 +27,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         //  Categories
         $router->post('/api/admin/categories', 'CategoriesController@create');
         $router->get('/api/admin/categories/{id}', 'CategoriesController@read');
+        $router->get('/api/admin/categories/get-back/{id}', 'CategoriesController@getBack');
         $router->get('/api/admin/categories/', 'CategoriesController@getAll');
         $router->post('/api/admin/categories/{id}', 'CategoriesController@update');
         $router->delete('/api/admin/categories/{id}', 'CategoriesController@delete');

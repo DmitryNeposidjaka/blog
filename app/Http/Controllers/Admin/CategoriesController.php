@@ -20,8 +20,9 @@ class CategoriesController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-
-        return response()->json((new Category(['name' => $request->input('name')]))->save());
+        $model = new Category(['name' => $request->input('name')]);
+        $model->save();
+        return response()->json($model);
     }
 
     public function read($id)
@@ -36,8 +37,8 @@ class CategoriesController extends Controller
         ]);
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
-
-        return response()->json($category->save());
+        $category->save();
+        return response()->json($category);
     }
 
     public function getAll(){
@@ -48,7 +49,14 @@ class CategoriesController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->disabled = true;
-
-        return response()->json($category->save());
+        $category->save();
+        return response()->json($category);
+    }
+    public function getBack($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->disabled = false;
+        $category->save();
+        return response()->json($category);
     }
 }
