@@ -17,7 +17,7 @@
                 :visible.sync="dialogEdit"
                 width="70%">
             <div>
-                <edit-post :model="model" :categories="categories"></edit-post>
+                <edit-post :model="model" :categories="categories" :tags="tags"></edit-post>
             </div>
             <span slot="footer" class="dialog-footer">
                     <el-button type="primary" @click="editPost">Сохранить</el-button>
@@ -82,7 +82,7 @@
     import PostView from './PostView';
     import EditPost from './EditPost';
   export default {
-    props: ['model', 'categories'],
+    props: ['model', 'categories', 'tags'],
     data(){
       return{
         dialogVisible: false,

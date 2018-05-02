@@ -8,7 +8,8 @@
                 <div>
                     <span></span>
                     <post-form
-                            :categories="getCategories">
+                            :categories="getCategories"
+                            :tags="getTags">
                     </post-form>
                 </div>
                 <span slot="footer" class="dialog-footer">
@@ -25,6 +26,7 @@
                 <posts-table
                         :models="getPosts"
                         :categories="getCategories"
+                        :tags="getTags"
                 ></posts-table>
             </el-card>
         </el-row>
@@ -48,6 +50,9 @@ export default {
     ]),
     ...mapGetters('categories', [
       'getCategories'
+    ]),
+    ...mapGetters('tags', [
+      'getTags'
     ]),
   },
   methods: {

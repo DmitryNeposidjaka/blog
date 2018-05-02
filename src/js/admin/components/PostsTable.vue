@@ -54,7 +54,7 @@
             <el-table-column
                     label="Операции">
                 <template slot-scope="scope">
-                    <post-operations :model="scope.row" :categories="categories"></post-operations>
+                    <post-operations :model="scope.row" :categories="categories" :tags="tags"></post-operations>
                 </template>
             </el-table-column>
         </el-table>
@@ -65,7 +65,7 @@
     import PostOperations from './PostOperations';
 
   export default {
-    props: ['models', 'categories'],
+    props: ['models', 'categories', 'tags'],
     data(){
       const vm = this;
       return{

@@ -54,14 +54,26 @@
             </el-col>
         </el-row>
         <el-row>
-            <el-select v-model="postForm.categories" multiple placeholder="Select">
-                <el-option
-                        v-for="item in categories"
-                        :key="item.id"
-                        :label="item.name"
-                        :value="item.id">
-                </el-option>
-            </el-select>
+            <el-col :span="6">
+                <el-select v-model="postForm.categories" multiple placeholder="Select">
+                    <el-option
+                            v-for="item in categories"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
+                    </el-option>
+                </el-select>
+            </el-col>
+            <el-col :span="6">
+                <el-select v-model="postForm.tags" multiple placeholder="Select">
+                    <el-option
+                            v-for="tag in tags"
+                            :key="tag.id"
+                            :label="tag.name"
+                            :value="tag.id">
+                    </el-option>
+                </el-select>
+            </el-col>
         </el-row>
     </el-form>
 </template>
@@ -70,7 +82,7 @@
 import VueMarkdown from 'vue-markdown'
 import ElRow from "element-ui/packages/row/src/row";
 export default {
-  props: ['categories'],
+  props: ['categories', 'tags'],
   data(){
     return{
       formName: 'postForm',
@@ -82,7 +94,8 @@ export default {
         description: '',
         title: '',
         text: '',
-        categories: []
+        categories: [],
+        tags: []
       },
       rules:{
         title: [

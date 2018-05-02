@@ -43,6 +43,10 @@ export default {
       'getCategories',
       'getCategory',
     ]),
+    ...mapGetters('tags',[
+      'getTags',
+      'getTag',
+    ]),
   },
   methods:{
     ...mapActions('posts',[
@@ -52,6 +56,10 @@ export default {
     ...mapActions('categories',[
       'setCategories',
       'addCategory',
+    ]),
+    ...mapActions('tags',[
+      'setTags',
+      'addTag',
     ]),
     loadPosts(){
       const vm = this;
@@ -71,11 +79,21 @@ export default {
         vm.setCategories(response.data)
       });
     },
+
+    loadTags(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/tags'
+      }).then(function (response) {
+        vm.setTags(response.data)
+      });
+    },
   },
   created(){
     this.loadPosts();
     this.loadCategories();
-    // this.loadPosts();
+    this.loadTags();
   },
   components: {MSidebar, MHeader,watcherAlert}
 }

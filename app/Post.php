@@ -29,5 +29,8 @@ class Post extends Model
     public function categories(){
         return $this->hasMany(PostCategory::class, 'post_id', 'id');
     }
+    public function tags(){
+        return $this->hasMany(PostTag::class, 'post_id', 'id');
+    }
 
 }

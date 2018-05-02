@@ -29,6 +29,11 @@ class TagsController extends Controller
         return response()->json(Tag::findOrFail($id));
     }
 
+    public function getAll()
+    {
+        return response()->json(Tag::all());
+    }
+
     public function update($id, Request $request)
     {
         $this->validate($request, [

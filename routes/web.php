@@ -33,6 +33,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         //  Tags
         $router->post('/api/admin/tags', 'TagsController@create');
         $router->get('/api/admin/tags/{id}', 'TagsController@read');
+        $router->get('/api/admin/tags/', 'TagsController@getAll');
         $router->post('/api/admin/tags/{id}', 'TagsController@update');
         $router->delete('/api/admin/tags/{id}', 'TagsController@delete');
         //  Posts
@@ -42,10 +43,6 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->get('/api/admin/posts/', 'PostsController@getAll');
         $router->post('/api/admin/posts/{id}', 'PostsController@update');
         $router->delete('/api/admin/posts/{id}', 'PostsController@delete');
-        //  PostTag
-        $router->post('/api/admin/post-tag', 'PostTagController@assign');
-        $router->get('/api/admin/post-tag/{post}/{tag}', 'PostTagController@getLinked');
-        $router->delete('/api/admin/post-tag/{post}/{tag}', 'PostTagController@unlink');
         //  Store
         $router->post('/api/admin/store/post-thumbnail', 'StoreController@postThumbnail');
     });
