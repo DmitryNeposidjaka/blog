@@ -4,9 +4,9 @@
                 title="Редактирование"
                 :visible.sync="dialogEdit"
                 width="70%">
-
+            <struct-form :model="model" form-name="structUpdate" :sendData="update"></struct-form>
             <span slot="footer" class="dialog-footer">
-                    <el-button type="primary" @click="editPost">Сохранить</el-button>
+                    <el-button type="primary" @click="editStruct">Сохранить</el-button>
                     <el-button @click="dialogEdit = false">Закрыть</el-button>
                 </span>
         </el-dialog>
@@ -17,7 +17,7 @@
                 width="30%"
                 center>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="deletePost(model.id)">Удалить</el-button>
+                <el-button @click="deleteStruct(model.id)">Удалить</el-button>
                 <el-button type="primary" @click="dialogDelete = false">Отменить</el-button>
             </span>
         </el-dialog>
@@ -28,7 +28,7 @@
                 width="30%"
                 center>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="getBackPost(model.id)">Восстановить</el-button>
+                <el-button @click="getBackStruct(model.id)">Восстановить</el-button>
                 <el-button type="primary" @click="dialogGetBack = false">Отменить</el-button>
             </span>
         </el-dialog>
@@ -60,6 +60,8 @@
 <script>
   import PostView from './PostView';
   import EditPost from './EditPost';
+  import StructForm from './StructForm';
+
   export default {
     props: ['model', 'delete', 'update', 'back'],
     data(){
@@ -71,13 +73,13 @@
       };
     },
     methods:{
-      editPost(){
-        this.$events.emit('editPost');
+      editStruct(){
+        this.$events.emit('saveStruct');
       },
-      getBackPost(id){
+      getBackStruct(id){
         this.back(id);
       },
-      deletePost(id){
+      deleteStruct(id){
         this.delete(id);
       },
       closeModal() {
@@ -90,7 +92,7 @@
     created(){
       this.$events.on('structUpdated', () => {this.closeModal()})
     },
-    components: {PostView,EditPost}
+    components: {PostView,EditPost, StructForm}
   }
 </script>
 

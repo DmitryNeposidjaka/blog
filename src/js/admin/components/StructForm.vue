@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['formName', 'sendData'],
+  props: ['model','formName', 'sendData'],
   data(){
     return {
       form: {
@@ -49,6 +49,7 @@ export default {
     },
   },
   created(){
+    if(this.model != null) Object.assign(this.form, this.model)
     this.$events.on('saveStruct', () => {this.saveForm()})
   }
 }

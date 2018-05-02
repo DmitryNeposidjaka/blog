@@ -11,7 +11,7 @@
                     width="50%"
                     :before-close="handleClose">
                 <div>
-                    <struct-form form-name="tagNew"></struct-form>
+                    <struct-form form-name="tagNew" :sendData="tagRequest"></struct-form>
                 </div>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="handleClose">Отменить</el-button>
@@ -43,7 +43,7 @@
                 <el-table-column
                         label="Операции">
                     <template slot-scope="scope">
-
+                        <struct-operations :model="scope.row":delete="deleteRequest" :update="updateRequest" :back="getBackRequest"></struct-operations>
                     </template>
                 </el-table-column>
             </el-table>
@@ -70,6 +70,53 @@
             done();
           })
           .catch(_ => {});
+      },
+      tagRequest(formData){
+        const vm = this;
+        vm.axios({
+          method: 'post',
+          url: '/tags',
+          data: formData,
+        }).then(function (response) {
+          if(response.status == 200){
+            vm.$events.emit('addTag', response.data);
+            vm.dialogVisible = false;
+          }
+        });
+      },
+      deleteRequest(id){
+        const vm = this;
+        this.axios({
+          method: 'delete',
+          url: '/tags/'+id,
+        }).then(function (request) {
+          if(request.status == 200 ) vm.dialogDelete = false
+          vm.$events.emit('structUpdated', request.data);
+          vm.$events.emit('tagUpdated', request.data );
+        });
+      },
+      updateRequest(formData){
+        const vm = this;
+        this.axios({
+          method: 'post',
+          url: '/tags/'+formData.get('id'),
+          data: formData,
+        }).then(function (request) {
+          if(request.status == 200 ) vm.dialogEdit = false
+          vm.$events.emit('structUpdated', request.data);
+          vm.$events.emit('tagUpdated', request.data );
+        });
+      },
+      getBackRequest(id){
+        const vm = this;
+        this.axios({
+          method: 'get',
+          url: '/tags/get-back/'+id,
+        }).then(function (request) {
+          if(request.status == 200 ) vm.dialogGetBack = false
+          vm.$events.emit('structUpdated', request.data);
+          vm.$events.emit('tagUpdated', request.data );
+        });
       },
       saveTag(){
         this.$events.emit('saveStruct');

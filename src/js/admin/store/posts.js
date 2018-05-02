@@ -34,7 +34,6 @@ const store = {
       context.commit('addPost', data);
     },
     updatePost(context, data){
-      console.log(data)
       context.commit('updatePost', data);
     },
   },

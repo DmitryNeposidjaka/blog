@@ -143,12 +143,12 @@
           data: formData,
         }).then(function (response) {
           if(response.status == 200){
-            vm.postUpdated();
+            vm.postUpdated(response.data);
           }
         });
       },
-      postUpdated(){
-        this.$events.emit('postUpdated');
+      postUpdated(data){
+        this.$events.emit('postUpdated', data);
       },
       getFormData(data = {}){
         const formData = new FormData();
@@ -175,7 +175,7 @@
       }
     },
     created(){
-      this.postForm = this.model;   //TODO переписать под модель в форму
+      Object.assign(this.postForm, this.model);
       this.temporary.thumbnail = this.model.thumbnail;
       this.$events.on('editPost', () => {this.save()})
     },

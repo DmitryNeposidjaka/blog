@@ -20,8 +20,9 @@ class TagsController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-
-        return response()->json((new Tag(['name' => $request->input('name')]))->save());
+        $model = new Tag(['name' => $request->input('name')]);
+        $model->save();
+        return response()->json($model);
     }
 
     public function read($id)
@@ -41,15 +42,23 @@ class TagsController extends Controller
         ]);
         $tag = Tag::findOrFail($id);
         $tag->name = $request->input('name');
-
-        return response()->json($tag->save());
+        $tag->save();
+        return response()->json($tag);
     }
 
     public function delete($id)
     {
         $tag = Tag::findOrFail($id);
         $tag->disabled = true;
+        $tag->save();
+        return response()->json($tag);
+    }
 
-        return response()->json($tag->save());
+    public function getBack($id)
+    {
+        $category = Tag::findOrFail($id);
+        $category->disabled = false;
+        $category->save();
+        return response()->json($category);
     }
 }

@@ -28,6 +28,10 @@ import {mapGetters, mapActions} from 'vuex';
         'addCategory',
         'updateCategory'
       ]),
+      ...mapActions('tags', [
+        'addTag',
+        'updateTag'
+      ]),
       send(){
         this.axios({
           method:'GET',
@@ -38,6 +42,8 @@ import {mapGetters, mapActions} from 'vuex';
     created(){
       this.$events.on('categoryUpdated', (model) => {this.updateCategory(model)})
       this.$events.on('addCategory', (model) => {this.addCategory(model)})
+      this.$events.on('tagUpdated', (model) => {this.updateTag(model)})
+      this.$events.on('addTag', (model) => {this.addTag(model)})
     },
     components: {Categories,Tags}
   }

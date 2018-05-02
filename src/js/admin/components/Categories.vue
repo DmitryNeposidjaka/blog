@@ -94,11 +94,12 @@ export default {
         vm.$events.emit('categoryUpdated', request.data );
       });
     },
-    updateRequest(id){
+    updateRequest(formData){
       const vm = this;
       this.axios({
         method: 'post',
-        url: '/categories/'+id,
+        url: '/categories/'+formData.get('id'),
+        data: formData,
       }).then(function (request) {
         if(request.status == 200 ) vm.dialogEdit = false
         vm.$events.emit('structUpdated', request.data);

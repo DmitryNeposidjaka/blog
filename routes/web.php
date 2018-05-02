@@ -34,6 +34,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         //  Tags
         $router->post('/api/admin/tags', 'TagsController@create');
         $router->get('/api/admin/tags/{id}', 'TagsController@read');
+        $router->get('/api/admin/tags/get-back/{id}', 'TagsController@getBack');
         $router->get('/api/admin/tags/', 'TagsController@getAll');
         $router->post('/api/admin/tags/{id}', 'TagsController@update');
         $router->delete('/api/admin/tags/{id}', 'TagsController@delete');
