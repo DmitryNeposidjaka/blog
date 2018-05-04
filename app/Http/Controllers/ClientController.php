@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Category;
 use App\Post;
 
 class ClientController extends Controller
@@ -19,5 +20,10 @@ class ClientController extends Controller
             $post->thumbnail = (!empty($post->thumbnail))? url(config('store.public.thumbnails').$post->thumbnail) : url(config('store.public.uploads').'default.jpg');
         }
         return response()->json($posts);
+    }
+    public function getCategories(){
+        $categories = Category::where('disabled', 0)->get();
+
+        return response()->json($categories);
     }
 }

@@ -19,7 +19,7 @@
                 </el-main>
 
             </el-container>
-            <m-sidebar></m-sidebar>
+            <m-sidebar :categories="getCategories"></m-sidebar>
         </el-container>
     </el-container>
 </template>
@@ -41,10 +41,17 @@ export default {
       'getPosts',
   //    'getPost',
     ]),
+    ...mapGetters('categories', [
+      'getCategories',
+  //    'getPost',
+    ]),
   },
   methods: {
     ...mapActions('posts', [
       'setPosts'
+    ]),
+    ...mapActions('categories', [
+      'setCategories'
     ]),
     loadPosts(){
         const vm = this;
@@ -54,10 +61,20 @@ export default {
         }).then(function (response) {
           vm.setPosts(response.data);
         })
-    }
+    },
+    loadCategories(){
+        const vm = this;
+        this.axios({
+          method: 'get',
+          url: '/categories'
+        }).then(function (response) {
+          vm.setCategories(response.data);
+        })
+    },
   },
   created(){
     this.loadPosts()
+    this.loadCategories()
   },
   components: {MHeader, MSidebar, CHeader},
 }
