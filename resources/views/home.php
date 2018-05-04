@@ -9,7 +9,7 @@
 ?>
 <html>
 <body>
+<div id="app"></div>
 <script src="/dist/app.js"></script>
-<h1>Hello !</h1>
 </body>
 </html>

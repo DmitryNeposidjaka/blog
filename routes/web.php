@@ -49,3 +49,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->post('/api/admin/store/post-thumbnail', 'StoreController@postThumbnail');
     });
 });
+
+$router->group(['middleware' => 'client'], function() use ($router) {
+    $router->get('/posts', 'ClientController@getPosts');
+});

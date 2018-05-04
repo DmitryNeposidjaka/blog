@@ -65,6 +65,7 @@ $app->singleton(
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'client' => App\Http\Middleware\ClientMiddleware::class,
     'refresh' => App\Http\Middleware\Refresh::class,
 ]);
 
