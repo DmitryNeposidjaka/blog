@@ -1,0 +1,48 @@
+.menu-button{
+    position: fixed;
+    right: 10px;
+    display: none;
+    top: 200px;
+}
+.open{
+    position: relative;
+    right: 100px;
+    top: 100px;
+    display: block !important;
+
+}
+.el-aside{
+    line-height: 20px;
+    max-width: 300px;
+}
+
+@media screen and (max-device-width: 1500px) {
+
+}
+@media screen and (max-device-width: 1200px) {
+
+}
+
+@media screen and (max-device-width: 992px) {
+
+}
+@media screen and (max-device-width: 768px) {
+    .menu-button{
+        display: block;
+    }
+    .el-aside{
+        display: none;
+        font-size: 24px;
+    }
+}
+@media screen and (max-device-width: 420px) {
+    .el-aside{
+        font-size: 24px;
+        max-width: 300px;
+    }
+}
+@media screen and (max-device-width: 375px) {
+    .el-aside{
+        font-size: 45px;
+    }
+}

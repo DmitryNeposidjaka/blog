@@ -3,9 +3,9 @@
         <el-header id="el-header" style="text-align: right; font-size: 12px">
             <m-header></m-header>
         </el-header>
-        <el-container class="main-container">
+        <el-container :class="main-container">
 
-            <el-container>
+            <el-container :class="[{menuOpen: menuOpen}]">
 
                 <el-main>
                     <el-header id="c-header" >
@@ -33,7 +33,7 @@ import {mapGetters, mapActions} from 'vuex';
 export default {
   data(){
     return {
-
+      menuOpen: false,
     }
   },
   computed: {
@@ -71,10 +71,14 @@ export default {
           vm.setCategories(response.data);
         })
     },
+    menuChange(f){
+      this.menuOpen = f;
+    }
   },
   created(){
     this.loadPosts()
     this.loadCategories()
+    this.$events.on('menuChange', (f) => {this.menuChange(f)})
   },
   components: {MHeader, MSidebar, CHeader},
 }
@@ -83,45 +87,16 @@ export default {
 <style>
     @import url('https://fonts.googleapis.com/css?family=Oswald');
     @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-    #el-header {
-        background-color: #333;
-        color: #333;
-        text-align: center;
-        line-height: 60px;
-    }
-    #c-header {
-        background-color: #fff;
-        border-bottom: 1px solid #e4e4e4;
-        color: #333;
-        text-align: center;
-        line-height: 60px;
-    }
-
-    .el-aside {
-        background-color: #fff;
-        color: #333;
-        text-align: center;
-        line-height: 200px;
-        margin-right: 300px;
-        border-left: solid 1px gray;
-        padding: 20px;
-    }
-
-    .el-main {
-        background-color: #fff;
-        color: #333;
-        text-align: center;
-        line-height: 160px;
-        margin-left: 25%;
-        margin-right: 5%;
-        padding: 20px;
-    }
-
-    body > .el-container {
-        margin-bottom: 40px;
+    @import "../styles/main.css";
+    .menuOpen{
+        position: relative;
+        left: -200px;
     }
     .main-container{
         margin-top: 50px;
+        position: absolute;
+        top: 50px;
+        overflow: hidden;
     }
     .el-container:nth-child(5) .el-aside,
     .el-container:nth-child(6) .el-aside {

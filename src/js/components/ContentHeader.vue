@@ -21,6 +21,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+@import "../styles/content-header.css";
 </style>

@@ -1,0 +1,66 @@
+.time{
+    color: #909399;
+    font-size: 12px;
+}
+.title{
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Oswald', sans-serif;
+    margin: 20px 0px 40px 0px;
+}
+.card{
+    width: 100%;
+    padding: 20px 0px;
+    text-align: left;
+    line-height: 20px
+}
+.description{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin : 10px 0px;
+}
+.image{
+    width: 100%;
+}
+.text-preview{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 40px 0px;
+}
+
+@media screen and (max-device-width: 1500px) {
+
+}
+@media screen and (max-device-width: 1200px) {
+
+}
+
+@media screen and (max-device-width: 992px) {
+
+}
+@media screen and (max-device-width: 768px) {
+    .el-button{
+        font-size: 25px;
+        padding: 15px;
+    }
+}
+@media screen and (max-device-width: 420px) {
+    .title{
+        font-size: 18px;
+        margin: 25px 0px 40px 0px;
+    }
+    .time{
+        font-size: 14px;
+    }
+    .description{
+        font-size: 12px;
+    }
+    .text-preview{
+        font-size: 12px;
+    }
+    .el-button{
+        font-size: 45px;
+        padding: 20px;
+    }
+}
+@media screen and (max-device-width: 375px) {
+
+}

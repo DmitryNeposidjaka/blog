@@ -34,29 +34,6 @@
 </script>
 
 <style>
-    .time{
-        color: #909399;
-        font-size: 12px;
-    }
-    .title{
-        font-family: 'Oswald', sans-serif;
-        margin: 20px 0px 40px 0px;
-    }
-    .card{
-        width: 100%;
-        padding: 20px 0px;
-        text-align: left;
-        line-height: 20px
-    }
-    .description{
-        font-family: 'Source Sans Pro', sans-serif;
-        margin : 10px 0px;
-    }
-    .image{
-        width: 100%;
-    }
-    .text-preview{
-        font-family: 'Source Sans Pro', sans-serif;
-        margin: 40px 0px;
-    }
+    @import "../styles/post-preview.css";
+
 </style>

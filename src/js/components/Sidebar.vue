@@ -1,8 +1,12 @@
 <template>
-    <el-aside width="200px">
-        <post-filter></post-filter>
-        <categories :categories="categories"></categories>
-    </el-aside>
+    <div>
+        <el-button class="menu-button" @click="ff" icon="el-icon-menu"></el-button>
+        <el-aside  :class="[{open: open}]">
+            <post-filter></post-filter>
+            <categories :categories="categories"></categories>
+        </el-aside>
+    </div>
+
 </template>
 
 <script>
@@ -12,14 +16,20 @@
     export default {
       props: ['categories'],
       data(){
-        return {};
+        return {
+          open: false,
+        };
+      },
+      methods: {
+        ff(){
+          this.open = this.open? false : true;
+          this.$events.emit('menuChange', this.open)
+        }
       },
       components: {PostFilter,Categories}
     }
 </script>
 
-<style>
-    .el-aside{
-        line-height: 20px;
-    }
+<style scoped>
+@import "../styles/sidebar.css";
 </style>

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@websanova/vue-auth": "^2.21.3-beta",
+    "animejs": "^2.2.0",
     "vue-markdown": "^2.2.4"
   }
 }

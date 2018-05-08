@@ -1,0 +1,24 @@
+
+@media screen and (max-device-width: 1500px) {
+
+}
+@media screen and (max-device-width: 1200px) {
+
+}
+@media screen and (max-device-width: 992px) {
+
+}
+@media screen and (max-device-width: 768px) {
+    .el-radio-button span{
+        font-size: 24px;
+    }
+}
+@media screen and (max-device-width: 420px) {
+    .el-radio-button span{
+        font-size: 50px;
+    }
+
+}
+@media screen and (max-device-width: 375px) {
+
+}
