@@ -3,10 +3,9 @@
         <el-header id="el-header" style="text-align: right; font-size: 12px">
             <m-header></m-header>
         </el-header>
-        <el-container :class="main-container">
+        <el-container class="main-container">
 
             <el-container :class="[{menuOpen: menuOpen}]">
-
                 <el-main>
                     <el-header id="c-header" >
                         <c-header></c-header>
@@ -17,7 +16,6 @@
                     </el-row>
                     <router-view></router-view>
                 </el-main>
-
             </el-container>
             <m-sidebar :categories="getCategories"></m-sidebar>
         </el-container>
@@ -92,12 +90,12 @@ export default {
         position: relative;
         left: -200px;
     }
-    .main-container{
+    /*.main-container{
         margin-top: 50px;
         position: absolute;
         top: 50px;
         overflow: hidden;
-    }
+    }*/
     .el-container:nth-child(5) .el-aside,
     .el-container:nth-child(6) .el-aside {
         line-height: 260px;

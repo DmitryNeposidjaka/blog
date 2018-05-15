@@ -7,7 +7,7 @@
             <div class="text-preview">{{textPreview}}</div>
             <div style="padding: 14px;">
                 <div class="bottom clearfix">
-                    <el-button type="primary" class="button" plain icon="el-icon-arrow-right">Читать дальше</el-button>
+                    <router-link :to="{ path: 'post', name: 'post-page', params: { id: post.id }}"><el-button type="primary" class="button" plain icon="el-icon-arrow-right">Читать дальше</el-button></router-link>
                 </div>
             </div>
         </div>

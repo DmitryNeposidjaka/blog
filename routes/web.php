@@ -52,5 +52,6 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
 
 $router->group(['middleware' => 'client'], function() use ($router) {
     $router->get('/posts', 'ClientController@getPosts');
+    $router->get('/post/{id}', 'ClientController@getPost');
     $router->get('/categories', 'ClientController@getCategories');
 });
