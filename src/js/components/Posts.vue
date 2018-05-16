@@ -8,7 +8,6 @@
 import PostPreview from './PostPreview';
 
 export default {
-
   props: ['posts'],
   data(){
     return {};

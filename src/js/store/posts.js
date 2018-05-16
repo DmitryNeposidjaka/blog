@@ -11,7 +11,7 @@ const posts = {
       return state.posts.map(function (item, i, arr) {
         return item.id == id;
       });
-    }
+    },
   },
   mutations: {
     setPosts(state, data){
