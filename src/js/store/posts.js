@@ -12,6 +12,16 @@ const posts = {
         return item.id == id;
       });
     },
+    getCategoryPost: state => {
+      return (id) => {
+        return state.posts.filter(function (item, i, arr) {
+          const c = item.categories.filter(function (item, i, arr) {
+            return item.category_id == id;
+          });
+          return c.length > 0
+        })
+      }
+    },
   },
   mutations: {
     setPosts(state, data){
