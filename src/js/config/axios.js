@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 
 const instance = axios.create({
-  baseURL: 'http://blog.test/',
+  baseURL: 'http://darvins.space/',
 });
 /*instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 instance.interceptors.response.use(function (response) {

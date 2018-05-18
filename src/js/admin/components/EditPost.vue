@@ -16,7 +16,7 @@
                         :headers="{Authorization: 'Bearer '+$auth.token() }"
                         name="thumbnail"
                         class="avatar-uploader"
-                        action="http://blog.test/api/admin/store/post-thumbnail"
+                        action="http://darvins.space/api/admin/store/post-thumbnail"
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload"

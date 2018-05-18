@@ -17,7 +17,7 @@ class Tags extends Migration
             $table->increments('id');
             $table->string('name', 56);
             $table->timestamps();
-            $table->boolean()->default(0);
+            $table->boolean('disabled')->default(0);
         });
     }
 
