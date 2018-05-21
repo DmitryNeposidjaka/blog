@@ -6,6 +6,7 @@
                 <template slot="title"><i class="el-icon-message"></i>Контент</template>
                 <el-menu-item index="2-1" route="/posts">Статьи</el-menu-item>
                 <el-menu-item index="2-2" route="/structurize">Структуризация </el-menu-item>
+                <el-menu-item index="2-3" route="/calendar">Календарь </el-menu-item>
             </el-submenu>
             <el-submenu index="3">
                 <template slot="title"><i class="el-icon-menu"></i>Navigator Two</template>

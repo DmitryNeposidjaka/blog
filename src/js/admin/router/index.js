@@ -4,6 +4,7 @@ import Home from '../layouts/MainLayout';
 import Authorize from '../layouts/AuthorizeLayout';
 import Posts from '../components/Posts';
 import Structurize from '../components/Structurize';
+import Calendar from '../components/Calendar';
 
 
 
@@ -25,6 +26,11 @@ const router = new Router({
           path: '/structurize',
           name: 'structurize',
           component: Structurize,
+        },
+        {
+          path: '/calendar',
+          name: 'calendar',
+          component: Calendar,
         },
       ],
     //  meta: {auth: true},
