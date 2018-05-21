@@ -85279,6 +85279,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_i18n__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_element_ui___default.a, { locale: __WEBPACK_IMPORTED_MODULE_6_element_ui_lib_locale_lang_ru_RU___default.a });
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_moment___default.a);
+console.log("http://blog.test");
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__webpack_require__(620), {
   auth: __webpack_require__(624),
@@ -85667,12 +85668,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }).then(function (response) {
         vm.setTags(response.data);
       });
+    },
+    checkUser: function checkUser() {
+      if (!this.$auth.check()) {
+        this.$router.push('/login');
+        return false;
+      }
+      return true;
     }
   }),
   created: function created() {
-    this.loadPosts();
-    this.loadCategories();
-    this.loadTags();
+    if (this.checkUser()) {
+      this.loadPosts();
+      this.loadCategories();
+      this.loadTags();
+    }
   },
 
   components: { MSidebar: __WEBPACK_IMPORTED_MODULE_0__components_Sidebar___default.a, MHeader: __WEBPACK_IMPORTED_MODULE_1__components_Header___default.a, watcherAlert: __WEBPACK_IMPORTED_MODULE_2__modules_watcherAlert___default.a }
@@ -86603,7 +86613,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    console.log(this.$auth);
+    if (true) {
+      console.log(this.$auth);
+    }
   }
 });
 
@@ -108911,7 +108923,7 @@ if (false) {
 
 
 var instance = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
-  baseURL: 'http://darvins.space/api/admin'
+  baseURL: "http://blog.test" + '/api/admin'
 });
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 instance.interceptors.response.use(function (response) {

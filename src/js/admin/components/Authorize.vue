@@ -61,7 +61,9 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$auth);
+    if(process.env.NODE_ENV === 'development'){
+      console.log(this.$auth);
+    }
   }
 }
 </script>

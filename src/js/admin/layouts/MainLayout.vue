@@ -89,11 +89,21 @@ export default {
         vm.setTags(response.data)
       });
     },
+
+    checkUser(){
+      if(!this.$auth.check()){
+        this.$router.push('/login');
+        return false;
+      }
+      return true;
+    }
   },
   created(){
-    this.loadPosts();
-    this.loadCategories();
-    this.loadTags();
+    if(this.checkUser()){
+      this.loadPosts();
+      this.loadCategories();
+      this.loadTags();
+    }
   },
   components: {MSidebar, MHeader,watcherAlert}
 }

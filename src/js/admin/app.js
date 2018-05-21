@@ -12,12 +12,14 @@ import store from './store';
 import 'element-ui/lib/theme-chalk/index.css';
 
 
+
 Vue.router = router;
 Vue.use(VueEvents);
 Vue.use(VueAxios, axios);
 Vue.use(VueI18n);
 Vue.use(ElementUI, { locale });
 Vue.use(moment);
+console.log(process.env.MIX_HOST)
 
 Vue.use(require('@websanova/vue-auth'), {
   auth: require('./auth/token.js'),

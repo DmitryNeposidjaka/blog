@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 
 const instance = axios.create({
-  baseURL: 'http://darvins.space/',
+  baseURL: process.env.MIX_HOST,
 });
 /*instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 instance.interceptors.response.use(function (response) {

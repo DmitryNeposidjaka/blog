@@ -3,7 +3,7 @@ import Vue from 'vue';
 import httpWatcher from '../modules/httpWatcher'
 
 const instance = axios.create({
-  baseURL: 'http://darvins.space/api/admin',
+  baseURL: process.env.MIX_HOST+'/api/admin',
 });
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
  instance.interceptors.response.use(function (response) {

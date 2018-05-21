@@ -83685,7 +83685,7 @@ var categories = {
 
 
 var instance = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
-  baseURL: 'http://darvins.space/'
+  baseURL: "http://blog.test"
 });
 /*instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 instance.interceptors.response.use(function (response) {
