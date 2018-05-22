@@ -10,9 +10,9 @@
              inMonth(day, $moment(selected))? '': cl.notMonth
          ]"
         :day="day" :key="k">
-            <ul slot="content">
+            <div slot="content">
 
-            </ul>
+            </div>
         </calendar-widget-item>
     </ol>
 </template>

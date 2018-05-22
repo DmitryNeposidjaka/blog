@@ -9,8 +9,14 @@
 namespace App;
 
 
-class Task
+use Illuminate\Database\Eloquent\Model;
+
+class Task extends Model
 {
+    const MAX = 'MAX';
+    const MIDDLE = 'MIDDLE';
+    const MIN = 'MIN';
+
     protected $fillable = [
         'title',
         'description',
@@ -21,5 +27,11 @@ class Task
     }
     public function getExecutor(){
         return $this->hasOne(User::class, 'executor', 'id');
+    }
+
+    public function close(){
+        $this->close = true;
+        $this->save();
+        return $this;
     }
 }

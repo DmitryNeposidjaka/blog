@@ -47,6 +47,28 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->delete('/api/admin/posts/{id}', 'PostsController@delete');
         //  Store
         $router->post('/api/admin/store/post-thumbnail', 'StoreController@postThumbnail');
+        //  Task
+        $router->post('/api/admin/task', 'TaskController@create');
+        $router->get('/api/admin/task/{id}', 'TaskController@read');
+        $router->get('/api/admin/task/close/{id}', 'TaskController@close');
+        $router->get('/api/admin/task/get-back/{id}', 'TaskController@getBack');
+        $router->get('/api/admin/task[/{user}]', 'TaskController@getAll');
+        $router->post('/api/admin/task/{id}', 'TaskController@update');
+        $router->delete('/api/admin/task/{id}', 'TaskController@delete');
+        //  Note
+        $router->post('/api/admin/note', 'NoteController@create');
+        $router->get('/api/admin/note/{id}', 'NoteController@read');
+        $router->get('/api/admin/note/get-back/{id}', 'NoteController@getBack');
+        $router->get('/api/admin/note[/{user}]', 'NoteController@getAll');
+        $router->post('/api/admin/note/{id}', 'NoteController@update');
+        $router->delete('/api/admin/note/{id}', 'NoteController@delete');
+        //  Achieve
+        $router->post('/api/admin/achieve', 'AchieveController@create');
+        $router->get('/api/admin/achieve/{id}', 'AchieveController@read');
+        $router->get('/api/admin/achieve/get-back/{id}', 'AchieveController@getBack');
+        $router->get('/api/admin/achieve[/{user}]', 'AchieveController@getAll');
+        $router->post('/api/admin/achieve/{id}', 'AchieveController@update');
+        $router->delete('/api/admin/achieve/{id}', 'AchieveController@delete');
     });
 });
 

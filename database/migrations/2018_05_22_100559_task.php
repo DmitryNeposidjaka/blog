@@ -22,6 +22,7 @@ class Task extends Migration
             $table->integer('executor');
             $table->timestamp('assigned_at');
             $table->boolean('disabled')->default(0);
+            $table->boolean('close')->default(0);
             $table->timestamps();
         });
     }

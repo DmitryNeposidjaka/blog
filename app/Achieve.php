@@ -9,7 +9,9 @@
 namespace App;
 
 
-class Achieve
+use Illuminate\Database\Eloquent\Model;
+
+class Achieve extends Model
 {
     protected $fillable = [
         'title',

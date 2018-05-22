@@ -6,17 +6,13 @@
  * Time: 13:30
  */
 
-namespace App\Providers;
+namespace App;
 
 
-use App\User;
+use Illuminate\Database\Eloquent\Model;
 
-class Note
+class Note extends Model
 {
-    const MAX = 'MAX';
-    const MIDDLE = 'MIDDLE';
-    const MIN = 'MIN';
-
     protected $fillable = [
         'title',
     ];
