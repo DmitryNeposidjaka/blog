@@ -1,6 +1,6 @@
 <template>
     <ol class="calendar">
-        <li v-for="day in days"
+        <calendar-widget-item v-for="(day, k) in days"
          :class="[
              cl.day,
              isToday(day, $moment(today))? cl.today : '',
@@ -9,14 +9,16 @@
              cl.dayPast,
              inMonth(day, $moment(selected))? '': cl.notMonth
          ]"
-         :data-weekday="day.format('dd')" :data-week="day.isoWeek()">
-            <span class="calendar-day__number">{{ day.format('DD') }}</span>
-            <div class="calendar-day__content">{{  }}</div>
-        </li>
+        :day="day" :key="k">
+            <ul slot="content">
+
+            </ul>
+        </calendar-widget-item>
     </ol>
 </template>
 
 <script>
+    import CalendarWidgetItem from './CalendarWidgetItem'
   export default {
     props: ['day'],
     data(){
@@ -29,7 +31,6 @@
           dayEntry: 'calendar-day--entry',
           today: 'calendar-day--today',
         },
-        elements: 35,
       }
     },
     computed: {
@@ -73,6 +74,7 @@
         return dates;
       },
     },
+    components: {CalendarWidgetItem},
     created(){}
   }
 </script>

@@ -7,7 +7,9 @@
                     placeholder="Pick a day"
                     @change="dateChange">
             </el-date-picker>
-            <calendar-widget :day="selected"></calendar-widget>
+            <calendar-widget :day="selected">
+
+            </calendar-widget>
         </el-col>
         <el-col :span="6">
             <calendar-task></calendar-task>
