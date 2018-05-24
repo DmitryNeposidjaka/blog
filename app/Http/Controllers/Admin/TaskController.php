@@ -12,8 +12,10 @@ namespace App\Http\Controllers\Admin;
 use App\Achieve;
 use App\Http\Controllers\Controller;
 use App\Task;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -36,9 +38,10 @@ class TaskController extends Controller
         $model->description = $request->input('description');
         $model->important = $request->input('important');
         $model->creator = $this->user->id;
-        $model->executor = $request->has('executor')? $request->input('important'): $this->user->id;
-        $model->assigned_at = $request->has('assigned_at')? Carbon::parse($request->input('assigned_at'))->timestamp: null;
+        $model->executor = $request->has('executor')? $request->input('executor'): $this->user->id;
+        $model->assigned_at = $request->has('assigned_at') && $request->input('assigned_at') != null ? Carbon::parse($request->input('assigned_at'))->timestamp: null;
         $model->save();
+        return response()->json($model);
     }
 
     public function read($id){
@@ -68,12 +71,12 @@ class TaskController extends Controller
         return response()->json($model);
     }
 
-    public function getAll($user){
-        if(isset($user)){
+    public function getAll($user = null){
+        if(!empty($user)){
             $user = User::findOrFail($user);
             $model = Task::where(['creator' => $user->id])->get();
         }else{
-            $model = Task::where(['creator' => $user->id])->get();
+            $model = Task::where(['creator' => $this->user->id])->get();
         }
 
         return response()->json($model);

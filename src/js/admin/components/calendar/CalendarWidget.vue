@@ -10,8 +10,10 @@
              inMonth(day, $moment(selected))? '': cl.notMonth
          ]"
         :day="day" :key="k">
-            <div slot="content">
-
+            <div slot="content" style="color: #fff">
+               <div v-if="getADayTasks(day).length > 0">
+                   задач: {{ getADayTasks(day).length}}
+               </div>
             </div>
         </calendar-widget-item>
     </ol>
@@ -20,7 +22,7 @@
 <script>
     import CalendarWidgetItem from './CalendarWidgetItem'
   export default {
-    props: ['day'],
+    props: ['day', 'tasks'],
     data(){
       return{
         cl: {
@@ -54,6 +56,12 @@
       }
     },
     methods: {
+      getADayTasks(day){
+        const vm = this;
+        return this.tasks.filter(function (item, i, arr) {
+          return vm.$moment(item.assigned_at).isSame(day, 'day');
+        });
+      },
       isToday(day, today){
         return day.startOf('date').diff(today.startOf('date')) == 0;
       },

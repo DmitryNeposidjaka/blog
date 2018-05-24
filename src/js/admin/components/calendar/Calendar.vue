@@ -1,25 +1,27 @@
 <template>
     <el-row :gutter="10" >
-        <el-col :span="18">
+        <el-col :span="16">
             <el-date-picker
                     v-model="value"
                     type="date"
                     placeholder="Pick a day"
                     @change="dateChange">
             </el-date-picker>
-            <calendar-widget :day="selected">
-
+            <calendar-widget :day="selected" :tasks="getTasks">
             </calendar-widget>
         </el-col>
-        <el-col :span="6">
-            <calendar-task></calendar-task>
+        <el-col :span="8">
+            <calendar-task :tasks="getTasks">
+            </calendar-task>
         </el-col>
     </el-row>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import CalendarWidget from './CalendarWidget';
 import CalendarTask from './CalendarTask';
+
 export default {
     data(){
       return{
@@ -27,6 +29,11 @@ export default {
         value: '',
       }
     },
+  computed: {
+    ...mapGetters('tasks',[
+      'getTasks'
+    ]),
+  },
     methods: {
       dateChange(day){
         this.selected = day;

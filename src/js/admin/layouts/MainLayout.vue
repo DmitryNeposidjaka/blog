@@ -61,6 +61,18 @@ export default {
       'setTags',
       'addTag',
     ]),
+    ...mapActions('tasks',[
+      'setTasks',
+      'addTask',
+    ]),
+    ...mapActions('notes',[
+      'setNotes',
+      'addNote',
+    ]),
+    ...mapActions('achieves',[
+      'setAchieves',
+      'addAchieve',
+    ]),
     loadPosts(){
       const vm = this;
       this.axios({
@@ -89,6 +101,33 @@ export default {
         vm.setTags(response.data)
       });
     },
+    loadTasks(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/task-all/'
+      }).then(function (response) {
+        vm.setTasks(response.data)
+      });
+    },
+    loadNotes(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/note-all/'
+      }).then(function (response) {
+        vm.setNotes(response.data)
+      });
+    },
+    loadAchieves(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/achieve-all/'
+      }).then(function (response) {
+        vm.setAchieves(response.data)
+      });
+    },
 
     checkUser(){
       if(!this.$auth.check()){
@@ -103,6 +142,9 @@ export default {
       this.loadPosts();
       this.loadCategories();
       this.loadTags();
+      this.loadTasks();
+      this.loadNotes();
+      this.loadAchieves();
     }
   },
   components: {MSidebar, MHeader,watcherAlert}

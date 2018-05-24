@@ -4,7 +4,7 @@ import Home from '../layouts/MainLayout';
 import Authorize from '../layouts/AuthorizeLayout';
 import Posts from '../components/Posts';
 import Structurize from '../components/Structurize';
-import Calendar from '../components/Calendar';
+import Calendar from '../components/calendar/Calendar';
 
 
 

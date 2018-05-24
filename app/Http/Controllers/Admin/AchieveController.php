@@ -11,7 +11,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Achieve;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Tests\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class AchieveController extends Controller
 {
@@ -33,6 +34,7 @@ class AchieveController extends Controller
         $model->description = $request->input('description');
         $model->creator = $this->user->id;
         $model->save();
+        return response()->json($model);
     }
 
     public function read($id){
@@ -59,12 +61,12 @@ class AchieveController extends Controller
         return response()->json($model);
     }
 
-    public function getAll($user){
+    public function getAll($user = null){
         if(isset($user)){
             $user = User::findOrFail($user);
             $model = Achieve::where(['creator' => $user->id])->get();
         }else{
-            $model = Achieve::where(['creator' => $user->id])->get();
+            $model = Achieve::where(['creator' => $this->user->id])->get();
         }
 
         return response()->json($model);

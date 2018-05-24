@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Note;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -32,6 +33,7 @@ class NoteController extends Controller
         $model->title = $request->input('title');
         $model->creator = $this->user->id;
         $model->save();
+        return response()->json($model);
     }
 
     public function read($id){
@@ -56,12 +58,12 @@ class NoteController extends Controller
         return response()->json($model);
     }
 
-    public function getAll($user){
-        if(isset($user)){
+    public function getAll($user = null){
+        if(!empty($user)){
             $user = User::findOrFail($user);
             $model = Note::where(['creator' => $user->id])->get();
         }else{
-            $model = Note::where(['creator' => $user->id])->get();
+            $model = Note::where(['creator' => $this->user->id])->get();
         }
 
         return response()->json($model);
