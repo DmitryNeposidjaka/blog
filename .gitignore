@@ -1,7 +1,8 @@
 /vendor
 /.idea
 /.vagrant
-public/dist/*
+public/dist/admin
+public/fonts
 /node_modules
 Homestead.json
 Homestead.yaml
