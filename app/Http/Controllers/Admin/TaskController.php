@@ -41,7 +41,7 @@ class TaskController extends Controller
         $model->executor = $request->has('executor')? $request->input('executor'): $this->user->id;
         $model->assigned_at = $request->has('assigned_at') && $request->input('assigned_at') != null ? Carbon::parse($request->input('assigned_at'))->timestamp: null;
         $model->save();
-        return response()->json($model);
+        return response()->json(Task::findOrFail($model->id));
     }
 
     public function read($id){
