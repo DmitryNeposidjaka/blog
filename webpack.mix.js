@@ -11,11 +11,6 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig({
-  node: {
-    fs: "empty"
-  },
-});
 
 mix.js('src/js/app.js', 'dist/')
   .sass('src/sass/app.scss', 'dist/');

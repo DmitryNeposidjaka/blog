@@ -38,6 +38,7 @@
 
 <script>
 export default {
+  props: {task: {default: null}},
   data(){
     return{
       formName: 'taskForm',
@@ -78,6 +79,18 @@ export default {
         }
       });
     },
+    edit(){
+      const data = this.$refs[this.formName];
+      data.validate((valid) => {
+        if (valid) {
+          const formData = this.getFormData(data.model);
+          this.editTask(formData);
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
     sendTask(formData){
       const vm = this;
       vm.axios({
@@ -87,6 +100,19 @@ export default {
       }).then(function (response) {
         if(response.status == 200){
           vm.$events.emit('addTask', response.data);
+          vm.formSaved();
+        }
+      });
+    },
+    editTask(formData){
+      const vm = this;
+      vm.axios({
+        method: 'post',
+        url: '/task/' + this.model.id,
+        data: formData,
+      }).then(function (response) {
+        if(response.status == 200){
+          vm.$events.emit('updateTask', response.data);
           vm.formSaved();
         }
       });
@@ -104,7 +130,9 @@ export default {
     },
   },
   created(){
+    if(this.task != null) Object.assign(this.model, this.task);
     this.$events.on('createTask', () => {return this.save()})
+    this.$events.on('editTask', () => {return this.edit()})
   },
 }
 </script>

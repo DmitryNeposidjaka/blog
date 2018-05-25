@@ -1,6 +1,6 @@
 <template>
     <el-row :gutter="10" >
-        <el-col :span="16">
+        <el-col :span="14">
             <el-date-picker
                     v-model="value"
                     type="date"
@@ -10,7 +10,7 @@
             <calendar-widget :day="selected" :tasks="getTasks">
             </calendar-widget>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="10">
             <calendar-task :tasks="getTasks">
             </calendar-task>
         </el-col>

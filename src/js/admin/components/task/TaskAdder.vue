@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     ...mapActions('tasks', [
-      'addTask'
+      'addTask',
+      'updateTask'
     ]),
     handleClose(done) {
       this.$confirm('Отменить добавление ?')
@@ -49,6 +50,10 @@ export default {
     const vm = this;
     this.$events.on('addTask', (data) => {
       vm.addTask(data);
+      vm.closeModal();
+    });
+    this.$events.on('updateTask', (data) => {
+      vm.updateTask(data);
       vm.closeModal();
     });
   },

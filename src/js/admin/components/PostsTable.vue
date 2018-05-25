@@ -90,7 +90,6 @@
 
         return models
       },
-
     },
     methods:{
       _dateFilter(models, range){
