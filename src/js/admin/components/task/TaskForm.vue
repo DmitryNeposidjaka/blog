@@ -26,12 +26,12 @@
         </el-form-item>
         <el-form-item label="На время">
             <el-date-picker
-                    :disabled="noTime"
+                    :disabled="Boolean(model.unlimited)"
                     v-model="model.assigned_at"
                     type="datetime"
                     placeholder="Выберите дату назначения">
             </el-date-picker>
-            <el-checkbox v-model="noTime" label="Безсрочный"></el-checkbox>
+            <el-checkbox v-model="model.unlimited" label="Безсрочный"></el-checkbox>
         </el-form-item>
     </el-form>
 </template>
@@ -49,6 +49,7 @@ export default {
         important: '',
         exec: null,
         assigned_at: '',
+        unlimited: false,
       },
       rules:{
         title: [

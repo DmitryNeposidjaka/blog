@@ -27,12 +27,12 @@
                 <el-tag size="mini" :type="tag.type" style="margin-right: 5px">{{tag.name}}</el-tag>
             </el-col>
 
-                <el-col :span="20">
+                <el-col :span="19">
                     <span>{{ item.title }}</span>
                 </el-col>
             </div>
 
-            <el-col :span="1">
+            <el-col :span="2">
                 <done v-on:taskDoneClicked="doneTask()"/>
             </el-col>
         </el-row>

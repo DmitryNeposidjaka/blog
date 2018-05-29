@@ -11,7 +11,7 @@
             </calendar-widget>
         </el-col>
         <el-col :span="10">
-            <calendar-task :tasks="getTasks">
+            <calendar-task :tasks="getTasks" :day="selected">
             </calendar-task>
         </el-col>
     </el-row>

@@ -1,6 +1,6 @@
 <template>
     <div class="calendar-task-wrapper">
-        <task-widget :tasks="tasks"></task-widget>
+        <task-widget :tasks="tasks" :day="day"></task-widget>
     </div>
 </template>
 
@@ -9,7 +9,7 @@
 import TaskWidget from '../task/TasksWidget'
 
 export default {
-    props: ['tasks'],
+    props: ['tasks', 'day'],
     data(){
         return {
 

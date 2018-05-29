@@ -37,6 +37,7 @@ class TaskController extends Controller
         $model->title = $request->input('title');
         $model->description = $request->input('description');
         $model->important = $request->input('important');
+        $model->unlimited = $request->input('unlimited')? 1 : 0;
         $model->creator = $this->user->id;
         $model->executor = $request->has('executor')? $request->input('executor'): $this->user->id;
         $model->assigned_at = $request->has('assigned_at') && $request->input('assigned_at') != null ? Carbon::parse($request->input('assigned_at'))->timestamp: null;
@@ -58,6 +59,7 @@ class TaskController extends Controller
         $model->title = $request->input('title');
         $model->description = $request->input('description');
         $model->important = $request->input('important');
+        $model->unlimited = $request->input('unlimited')? 1 : 0;
         $model->executor = $request->has('executor')? $request->input('important'): $this->user->id;
         $model->assigned_at = $request->has('assigned_at')? Carbon::parse($request->input('assigned_at'))->timestamp: null;
         $model->save();

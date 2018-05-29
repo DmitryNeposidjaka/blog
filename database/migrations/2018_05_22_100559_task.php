@@ -23,6 +23,7 @@ class Task extends Migration
             $table->timestamp('assigned_at');
             $table->boolean('disabled')->default(0);
             $table->boolean('close')->default(0);
+            $table->boolean('unlimited')->default(0);
             $table->timestamp('close_at');
             $table->timestamps();
         });
