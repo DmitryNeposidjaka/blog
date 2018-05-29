@@ -4,10 +4,10 @@
             <el-date-picker
                     v-model="value"
                     type="date"
-                    placeholder="Pick a day"
+                    placeholder="Выбрать день"
                     @change="dateChange">
             </el-date-picker>
-            <calendar-widget :day="selected" :tasks="getTasks">
+            <calendar-widget :day="selected" :tasks="getTasks" @cwDayChanged="dateChange">
             </calendar-widget>
         </el-col>
         <el-col :span="10">

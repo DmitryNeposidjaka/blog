@@ -1,5 +1,5 @@
 <template>
-    <li
+    <li @click="changeDay(day)"
         :data-weekday="day.format('dd')" :data-week="day.isoWeek()">
         <span class="calendar-day__number">{{ day.format('DD') }}</span>
         <div class="calendar-day__content"><div class="calendar-widget-item-content"><slot name="content"></slot></div></div>
@@ -13,6 +13,11 @@
         return {
 
         }
+      },
+      methods: {
+        changeDay(day){
+          this.$emit('cwiDayChanged', day)
+        },
       }
     }
 </script>

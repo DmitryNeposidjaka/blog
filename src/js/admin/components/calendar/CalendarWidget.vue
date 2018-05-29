@@ -9,8 +9,10 @@
              cl.dayPast,
              inMonth(day, $moment(selected))? '': cl.notMonth
          ]"
-        :day="day" :key="k">
-            <div slot="content" style="color: #fff">
+        :day="day"
+        :key="k"
+        @cwiDayChanged="changeDay">
+            <div slot="content" style="color: #fff" >
                <div v-if="getADayTasks(day).length > 0">
                    задач: {{ getADayTasks(day).length}}
                </div>
@@ -56,6 +58,9 @@
       }
     },
     methods: {
+      changeDay(day){
+        this.$emit('cwDayChanged', day)
+      },
       getADayTasks(day){
         const vm = this;
         return this.tasks.filter(function (item, i, arr) {
