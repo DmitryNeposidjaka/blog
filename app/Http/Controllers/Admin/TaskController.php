@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Achieve;
+use App\Helpers\TaskHelper;
 use App\Http\Controllers\Controller;
 use App\Task;
 use App\User;
@@ -42,6 +43,7 @@ class TaskController extends Controller
         $model->executor = $request->has('executor')? $request->input('executor'): $this->user->id;
         $model->assigned_at = $request->has('assigned_at') && $request->input('assigned_at') != null ? Carbon::parse($request->input('assigned_at'))->timestamp: null;
         $model->save();
+        if($request->has('tags')) TaskHelper::setTags($model, $request->input('tags'));
         return response()->json(Task::findOrFail($model->id));
     }
 
@@ -51,7 +53,7 @@ class TaskController extends Controller
     }
 
     public function update($id, Request $request){
-        $model = Task::findOrFail($id);
+        $model = Task::with('tags')->where(['id' => $id])->first();
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -63,7 +65,8 @@ class TaskController extends Controller
         $model->executor = $request->has('executor')? $request->input('important'): $this->user->id;
         $model->assigned_at = $request->has('assigned_at')? Carbon::parse($request->input('assigned_at'))->timestamp: null;
         $model->save();
-        return response()->json($model);
+        if($request->has('tags')) TaskHelper::updateTags($model, $request->input('tags'));
+        return response()->json(Task::with('tags')->where(['id' => $id])->first());
     }
 
     public function delete($id){
@@ -76,9 +79,9 @@ class TaskController extends Controller
     public function getAll($user = null){
         if(!empty($user)){
             $user = User::findOrFail($user);
-            $model = Task::where(['creator' => $user->id])->get();
+            $model = Task::with('tags')->where(['creator' => $user->id])->get();
         }else{
-            $model = Task::where(['creator' => $this->user->id])->get();
+            $model = Task::with('tags')->where(['creator' => $this->user->id])->get();
         }
 
         return response()->json($model);

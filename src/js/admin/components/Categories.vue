@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-card class="box-card">
+        <el-card class="box-card categories-box">
             <div slot="header" class="clearfix">
                 <span>Категории</span>
                 <el-button style="float: right; padding: 5px 5px" type="success" @click="dialogVisible = true">Добавить новую</el-button>
@@ -126,5 +126,8 @@ export default {
 </script>
 
 <style>
-
+.categories-box{
+    max-height: 500px;
+    overflow-y: scroll;
+}
 </style>

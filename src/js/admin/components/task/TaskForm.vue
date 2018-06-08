@@ -33,10 +33,27 @@
             </el-date-picker>
             <el-checkbox v-model="model.unlimited" label="Безсрочный"></el-checkbox>
         </el-form-item>
+        <el-form-item label="Тэги">
+            <el-select
+                    multiple
+                    filterable
+                    allow-create
+                    default-first-option
+                    value-key="id"
+                    v-model="model.tags">
+                <el-option
+                        v-for="item in getTaskTags"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id">
+                </el-option>
+            </el-select>
+        </el-form-item>
     </el-form>
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
 export default {
   props: {task: {default: null}},
   data(){
@@ -50,6 +67,7 @@ export default {
         exec: null,
         assigned_at: '',
         unlimited: false,
+        tags: [],
       },
       rules:{
         title: [
@@ -65,6 +83,11 @@ export default {
         ]
       }
     }
+  },
+  computed: {
+    ...mapGetters('taskTags',{
+      getTaskTags: 'getTags'
+    })
   },
   methods: {
     save(){
@@ -130,6 +153,9 @@ export default {
       }
       return formData;
     },
+  },
+  mounted() {
+    if(this.task != null) this.model.tags = this.task.tags.map(item => item.id);
   },
   created(){
     if(this.task != null) Object.assign(this.model, this.task);

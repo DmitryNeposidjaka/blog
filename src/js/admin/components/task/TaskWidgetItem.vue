@@ -59,7 +59,7 @@ export default {
   computed: {
     tag(){
       return this.tags.find(x => this.item.important == x.id)
-    }
+    },
   },
   methods:{
     editTask(){

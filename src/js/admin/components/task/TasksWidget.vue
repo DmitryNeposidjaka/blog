@@ -51,7 +51,6 @@ export default {
     _importantSort(data){
         return data.sort(function (a1, b1) {
           const a = a1.important, b = b1.important;
-          console.log(a,b)
           if(a == 'MAX' &&  b == 'MIDDLE')  return      -1
           if(a == 'MAX' && b == 'MIN')      return      -1
           if(a == 'MIDDLE' &&  b == 'MIN')  return      -1

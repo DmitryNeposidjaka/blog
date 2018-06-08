@@ -9,6 +9,9 @@
         <strong>Поставил: </strong><span>{{model.creator}}</span><br>
         <strong>Назначен: </strong><span>{{model.executor}}</span><br>
         <strong>Добавлен: </strong><span>{{model.created_at}}</span><br>
+        <div>
+            <el-tag v-for="(tag, key) in model.tags" :key="key" class="tag-item">{{ tag.name }}</el-tag>
+        </div>
         <task-operations
                 v-on:taskEditClicked="$emit('taskEditClicked')"
                 v-on:taskDeleteClicked="$emit('taskDeleteClicked')"
@@ -30,5 +33,8 @@
 <style>
     .task-view-wrapper{
 
+    }
+    .tag-item{
+        margin: 5px;
     }
 </style>

@@ -34,4 +34,8 @@ class Task extends Model
         $this->save();
         return $this;
     }
+
+    public function tags(){
+        return $this->belongsToMany(TaskTag::class, 'task_to_tag');
+    }
 }

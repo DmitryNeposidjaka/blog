@@ -1,8 +1,8 @@
 <template>
     <el-row>
-        <el-card class="box-card tags-box">
+        <el-card class="box-card task-tags-box">
             <div slot="header" class="clearfix">
-                <span>Метки</span>
+                <span>Тэги к задачам</span>
                 <el-button style="float: right; padding: 5px 5px" type="success" @click="dialogVisible = true">Добавить новую</el-button>
             </div>
             <el-dialog
@@ -75,11 +75,11 @@
         const vm = this;
         vm.axios({
           method: 'post',
-          url: '/tags',
+          url: '/task-tags',
           data: formData,
         }).then(function (response) {
           if(response.status == 200){
-            vm.$events.emit('addTag', response.data);
+            vm.$events.emit('addTaskTag', response.data);
             vm.dialogVisible = false;
           }
         });
@@ -88,34 +88,34 @@
         const vm = this;
         this.axios({
           method: 'delete',
-          url: '/tags/'+id,
+          url: '/task-tags/'+id,
         }).then(function (request) {
           if(request.status == 200 ) vm.dialogDelete = false
           vm.$events.emit('structUpdated', request.data);
-          vm.$events.emit('tagUpdated', request.data );
+          vm.$events.emit('taskTagUpdated', request.data );
         });
       },
       updateRequest(formData){
         const vm = this;
         this.axios({
           method: 'post',
-          url: '/tags/'+formData.get('id'),
+          url: '/task-tags/'+formData.get('id'),
           data: formData,
         }).then(function (request) {
           if(request.status == 200 ) vm.dialogEdit = false
           vm.$events.emit('structUpdated', request.data);
-          vm.$events.emit('tagUpdated', request.data );
+          vm.$events.emit('taskTagUpdated', request.data );
         });
       },
       getBackRequest(id){
         const vm = this;
         this.axios({
           method: 'get',
-          url: '/tags/get-back/'+id,
+          url: '/task-tags/get-back/'+id,
         }).then(function (request) {
           if(request.status == 200 ) vm.dialogGetBack = false
           vm.$events.emit('structUpdated', request.data);
-          vm.$events.emit('tagUpdated', request.data );
+          vm.$events.emit('taskTagUpdated', request.data );
         });
       },
       saveTag(){
@@ -127,7 +127,7 @@
 </script>
 
 <style>
-    .tags-box{
+    .task-tags-box{
         max-height: 500px;
         overflow-y: scroll;
     }

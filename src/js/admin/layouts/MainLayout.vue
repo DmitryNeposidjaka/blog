@@ -61,6 +61,10 @@ export default {
       'setTags',
       'addTag',
     ]),
+    ...mapActions('taskTags',{
+      setTaskTags: 'setTags',
+      addTaskTags: 'addTags'
+    }),
     ...mapActions('tasks',[
       'setTasks',
       'addTask',
@@ -99,6 +103,15 @@ export default {
         url: '/tags'
       }).then(function (response) {
         vm.setTags(response.data)
+      });
+    },
+    loadTaskTags(){
+      const vm = this;
+      this.axios({
+        method: 'get',
+        url: '/task-tags'
+      }).then(function (response) {
+        vm.setTaskTags(response.data)
       });
     },
     loadTasks(){
@@ -142,6 +155,7 @@ export default {
       this.loadPosts();
       this.loadCategories();
       this.loadTags();
+      this.loadTaskTags();
       this.loadTasks();
       this.loadNotes();
       this.loadAchieves();
