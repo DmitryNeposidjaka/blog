@@ -120,6 +120,7 @@ export default {
     },
     formSaved(){
       this.$refs[this.formName].resetFields();
+
       this.$events.emit('TaskCreated');
     },
     getFormData(data = {}){

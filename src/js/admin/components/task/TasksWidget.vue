@@ -31,6 +31,7 @@ export default {
       let filtered = this.tasks;
       filtered = this._closeFilter(filtered);
       filtered = this._deleteFilter(filtered);
+      filtered = this._importantSort(filtered);
       return filtered;
     },
     unlimited(){
@@ -47,15 +48,28 @@ export default {
     },
   },
   methods:{
+    _importantSort(data){
+        return data.sort(function (a1, b1) {
+          const a = a1.important, b = b1.important;
+          console.log(a,b)
+          if(a == 'MAX' &&  b == 'MIDDLE')  return      -1
+          if(a == 'MAX' && b == 'MIN')      return      -1
+          if(a == 'MIDDLE' &&  b == 'MIN')  return      -1
+          if(a == 'MIDDLE' &&  b == 'MAX')  return      1
+          if(a == 'MIN' &&  b == 'MIDDLE')  return      1
+          if(a == 'MIN' && b == 'MAX')      return      1
+
+          if(a == b) return 0
+          return -1
+        });
+    },
     _closeFilter(data){
         return data.filter(function(item, i, arr){
-          console.log(item)
           return item.close == false;
         });
     },
     _deleteFilter(data){
         return data.filter(function(item, i, arr){
-          console.log(item)
           return item.disabled == false;
         });
     },
