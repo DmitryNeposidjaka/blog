@@ -52,8 +52,8 @@
 </template>
 
 <script>
-  import StructForm from './StructForm';
-  import StructOperations from './StructOperations';
+  import StructForm from '../StructForm';
+  import StructOperations from '../StructOperations';
 
   export default {
     props: ['data'],

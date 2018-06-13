@@ -87,6 +87,17 @@ class TaskController extends Controller
         return response()->json($model);
     }
 
+    public function pager(Request $request){
+        if(!empty($request->has('user'))){
+            $user = User::findOrFail($request->input('user'));
+            $model = Task::with('tags')->where(['creator' => $user->id])->paginate(20);
+        }else{
+            $model = Task::with('tags')->where(['creator' => $this->user->id])->paginate(20);
+        }
+
+        return response()->json($model);
+    }
+
     public function close($id){
         $model = Task::findOrFail($id);
         $closed = $model->close();

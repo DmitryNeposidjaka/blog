@@ -5,6 +5,7 @@ import Authorize from '../layouts/AuthorizeLayout';
 import Posts from '../components/Posts';
 import Structurize from '../components/Structurize';
 import Calendar from '../components/calendar/Calendar';
+import Tasks from '../components/TaskPage';
 
 
 
@@ -31,6 +32,11 @@ const router = new Router({
           path: '/calendar',
           name: 'calendar',
           component: Calendar,
+        },
+        {
+          path: '/tasks',
+          name: 'tasks',
+          component: Tasks,
         },
       ],
     //  meta: {auth: true},

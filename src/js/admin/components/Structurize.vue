@@ -14,7 +14,7 @@
 <script>
 import Categories from './Categories';
 import Tags from './Tags';
-import TaskTags from './TaskTags';
+import TaskTags from './task/TaskTags';
 import {mapGetters, mapActions} from 'vuex';
 
   export default {

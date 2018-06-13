@@ -60,6 +60,7 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->get('/api/admin/task/close/{id}', 'TaskController@close');
         $router->get('/api/admin/task/get-back/{id}', 'TaskController@getBack');
         $router->get('/api/admin/task-all[/{user}]', 'TaskController@getAll');
+        $router->get('/api/admin/task-pager', 'TaskController@pager');
         $router->post('/api/admin/task/{id}', 'TaskController@update');
         $router->delete('/api/admin/task/{id}', 'TaskController@delete');
         //  Note
