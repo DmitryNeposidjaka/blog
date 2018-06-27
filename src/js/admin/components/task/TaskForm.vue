@@ -31,7 +31,7 @@
                     type="datetime"
                     placeholder="Выберите дату назначения">
             </el-date-picker>
-            <el-checkbox v-model="model.unlimited" label="Безсрочный"></el-checkbox>
+            <el-checkbox v-model="model.unlimited" label="Бессрочный"></el-checkbox>
         </el-form-item>
         <el-form-item label="Тэги">
             <el-select

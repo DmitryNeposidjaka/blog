@@ -10,7 +10,7 @@
                     <div class="main-location">
                         <el-breadcrumb separator-class="el-icon-arrow-right">
                             <el-breadcrumb-item :to="{ path: '/' }">Главная</el-breadcrumb-item>
-                            <el-breadcrumb-item>Страница</el-breadcrumb-item>
+                            <el-breadcrumb-item>{{$route.meta.local.ru}}</el-breadcrumb-item>
                         </el-breadcrumb>
                         <watcher-alert></watcher-alert>
                     </div>

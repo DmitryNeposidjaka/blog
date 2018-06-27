@@ -1,5 +1,16 @@
 <template>
     <el-row>
+        <el-dialog
+                title="Поставить новое задание"
+                :visible.sync="dialogVisible"
+                width="50%"
+                :before-close="handleClose">
+            <task-form></task-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">Отмена</el-button>
+                <el-button type="primary" @click="createTask">Поставить</el-button>
+            </span>
+        </el-dialog>
         <el-card class="box-card">
             <div slot="header" class="clearfix">
                 <span>Задачи</span>
@@ -27,6 +38,7 @@
   import TaskTable from './task/TaskTable';
   import {mapGetters} from 'vuex';
   import {mapActions} from 'vuex';
+  import TaskForm from './task/TaskForm';
 
   export default {
     data(){
@@ -51,6 +63,23 @@
     computed:{
     },
     methods:{
+      ...mapActions('tasks', [
+        'addTask',
+        'updateTask'
+      ]),
+      handleClose(done) {
+        this.$confirm('Отменить добавление ?')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
+      createTask(){
+        this.$events.emit('createTask');
+      },
+      closeModal(){
+        this.dialogVisible = false;
+      },
       handleCurrentChange(val){
         this.getData(val);
       },
@@ -77,9 +106,18 @@
       }
     },
     created(){
+      const vm = this;
       this.getData();
+      this.$events.on('addTask', (data) => {
+        vm.addTask(data);
+        vm.closeModal();
+      });
+      this.$events.on('updateTask', (data) => {
+        vm.updateTask(data);
+        vm.closeModal();
+      });
     },
-    components: { TaskTable}
+    components: { TaskTable, TaskForm}
   }
 </script>
 

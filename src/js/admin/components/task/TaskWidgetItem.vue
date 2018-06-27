@@ -23,10 +23,9 @@
         </el-dialog>
         <el-row class="task-widget-item" >
             <div @click="dialogVisible=true">
-            <el-col :span="3">
-                <el-tag size="mini" :type="tag.type" style="margin-right: 5px">{{tag.name}}</el-tag>
-            </el-col>
-
+                <el-col :span="3">
+                    <el-tag size="mini" :type="tag.type" style="margin-right: 5px">{{tag.name}}</el-tag>
+                </el-col>
                 <el-col :span="19">
                     <span>{{ item.title }}</span>
                 </el-col>

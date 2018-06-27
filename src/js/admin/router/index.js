@@ -22,21 +22,45 @@ const router = new Router({
           path: '/posts',
           name: 'posts',
           component: Posts,
+          meta: {
+            local: {
+              ru: 'Статьи',
+              en: 'Posts',
+            }
+          }
         },
         {
           path: '/structurize',
           name: 'structurize',
           component: Structurize,
+          meta: {
+            local: {
+              ru: 'Структуризация',
+              en: 'Posts',
+            }
+          }
         },
         {
           path: '/calendar',
           name: 'calendar',
           component: Calendar,
+          meta: {
+            local: {
+              ru: 'Календарь',
+              en: 'Calendar',
+            }
+          }
         },
         {
           path: '/tasks',
           name: 'tasks',
           component: Tasks,
+          meta: {
+            local: {
+              ru: 'Задачи',
+              en: 'Tasks',
+            }
+          }
         },
       ],
     //  meta: {auth: true},
