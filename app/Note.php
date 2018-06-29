@@ -20,4 +20,9 @@ class Note extends Model
     public function getCreator(){
         return $this->hasOne(User::class, 'creator', 'id');
     }
+
+    public function tags(){
+        return $this->belongsToMany(NoteTag::class, 'note_to_tag');
+    }
+
 }

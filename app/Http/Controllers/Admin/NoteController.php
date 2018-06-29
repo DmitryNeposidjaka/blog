@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Helpers\NoteHelper;
 use App\Http\Controllers\Controller;
 use App\Note;
 use App\User;
@@ -33,6 +34,7 @@ class NoteController extends Controller
         $model->title = $request->input('title');
         $model->creator = $this->user->id;
         $model->save();
+        if($request->has('tags')) NoteHelper::setTags($model, $request->input('tags'));
         return response()->json($model);
     }
 
