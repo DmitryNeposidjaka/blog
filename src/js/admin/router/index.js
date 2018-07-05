@@ -6,6 +6,7 @@ import Posts from '../components/Posts';
 import Structurize from '../components/Structurize';
 import Calendar from '../components/calendar/Calendar';
 import Tasks from '../components/TaskPage';
+import Notes from '../components/NotePage';
 
 
 
@@ -59,6 +60,17 @@ const router = new Router({
             local: {
               ru: 'Задачи',
               en: 'Tasks',
+            }
+          }
+        },
+        {
+          path: '/notes',
+          name: 'notes',
+          component: Tasks,
+          meta: {
+            local: {
+              ru: 'Заметки',
+              en: 'Notes',
             }
           }
         },

@@ -45,6 +45,13 @@ $router->group(['namespace' => 'Admin'], function () use ($router) {
         $router->get('/api/admin/task-tags/', 'TaskTagsController@getAll');
         $router->post('/api/admin/task-tags/{id}', 'TaskTagsController@update');
         $router->delete('/api/admin/task-tags/{id}', 'TaskTagsController@delete');
+        //  Note-Tags
+        $router->post('/api/admin/note-tags', 'NoteTagsController@create');
+        $router->get('/api/admin/note-tags/{id}', 'NoteTagsController@read');
+        $router->get('/api/admin/note-tags/get-back/{id}', 'NoteTagsController@getBack');
+        $router->get('/api/admin/note-tags/', 'NoteTagsController@getAll');
+        $router->post('/api/admin/note-tags/{id}', 'NoteTagsController@update');
+        $router->delete('/api/admin/note-tags/{id}', 'NoteTagsController@delete');
         //  Posts
         $router->post('/api/admin/posts', 'PostsController@create');
         $router->get('/api/admin/posts/{id}', 'PostsController@read');

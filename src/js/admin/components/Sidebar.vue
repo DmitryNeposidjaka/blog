@@ -12,6 +12,7 @@
                 <template slot="title"><i class="el-icon-more-outline"></i>Работа</template>
                 <el-menu-item-group>
                     <el-menu-item index="3-1" route="/tasks">Задачи</el-menu-item>
+                    <el-menu-item index="3-2" route="/notes">Заметки</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
 

@@ -1,5 +1,7 @@
 <template>
     <div class="s-header">
+        <note-adder></note-adder>
+        <el-button size="mini" icon="el-icon-edit" title="Добавить заметку" @click="openNoteAdder"></el-button>
         <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
@@ -13,7 +15,26 @@
 </template>
 
 <script>
-
+    import NoteAdder from './note/NoteAdder';
+export default {
+  data(){
+    return {
+      noteAdderOpened: false,
+    };
+  },
+  methods: {
+    openNoteAdder(){
+      if(!this.noteAdderOpened){
+        this.$events.emit('open-note-adder');
+        this.noteAdderOpened = true;
+      };
+    },
+  },
+  components: {NoteAdder},
+  created(){
+    this.$events.on('close-note-adder', () => {this.noteAdderOpened = false});
+  }
+}
 </script>
 
 <style>
